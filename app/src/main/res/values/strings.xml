@@ -2,5 +2,6 @@
     <string name="app_name">TP2_Samuel_Emma</string>
     <string name="start_humidity">Start Humidity</string>
     <string name="start_temperature">Start Temperature</string>
-    <string name="messages">Something Here</string>
+    <string name="Messages">Messages</string>
+    <string name="messages_textArea">Something Here</string>
 </resources>
