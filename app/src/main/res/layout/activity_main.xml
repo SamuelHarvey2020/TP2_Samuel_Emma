@@ -12,63 +12,63 @@
         android:layout_height="252dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.171"
+        app:layout_constraintVertical_bias="0.085"
         app:srcCompat="@drawable/cloud" />
 
     <Button
         android:id="@+id/button_Humid"
         android:layout_width="150dp"
-        android:layout_height="50dp"
+        android:layout_height="55dp"
         android:onClick="onStartHumidity"
         android:text="@string/start_humidity"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.137"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.540"
-        app:layout_constraintHorizontal_bias="0.15"/>
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.08" />
 
     <Button
         android:id="@+id/button_Temp"
         android:layout_width="150dp"
-        android:layout_height="50dp"
+        android:layout_height="55dp"
         android:onClick="onStartTemperature"
         android:text="@string/start_temperature"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.869"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.540"
-        app:layout_constraintHorizontal_bias="0.85"/>
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.079" />
 
     <TextView
         android:id="@+id/tv_Message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
         android:text="@string/Messages"
         android:textAllCaps="false"
         android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tv_messagesText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.036"
+        app:layout_constraintHorizontal_bias="0.058"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.591" />
+        app:layout_constraintTop_toBottomOf="@+id/button_Humid"
+        app:layout_constraintVertical_bias="0.6" />
 
     <TextView
         android:id="@+id/tv_messagesText"
         android:layout_width="390dp"
-        android:layout_height="235dp"
-        android:text="@string/messages_textArea"
+        android:layout_height="180dp"
         android:background="@color/colorDarkGrey"
+        android:text="@string/messages_textArea"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.967" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.9" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
