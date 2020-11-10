@@ -11,12 +11,19 @@
         android:layout_width="252dp"
         android:layout_height="252dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button_Humid"
-        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.496"
         app:srcCompat="@drawable/cloud" />
+
+    <!-- Guideline -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.4"
+        />
 
     <Button
         android:id="@+id/button_Humid"
@@ -24,12 +31,10 @@
         android:layout_height="55dp"
         android:onClick="onStartHumidity"
         android:text="@string/start_humidity"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.535"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.08" />
+        app:layout_constraintBottom_toBottomOf="@id/tv_Message"
+        app:layout_constraintEnd_toStartOf="@id/button_Temp"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <Button
         android:id="@+id/button_Temp"
@@ -37,12 +42,10 @@
         android:layout_height="55dp"
         android:onClick="onStartTemperature"
         android:text="@string/start_temperature"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/button_Humid"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.877"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.08" />
+        app:layout_constraintStart_toEndOf="@id/button_Humid"
+        app:layout_constraintTop_toTopOf="@id/button_Humid" />
 
     <TextView
         android:id="@+id/tv_Message"
@@ -52,11 +55,9 @@
         android:textAllCaps="false"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/tv_messagesText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.524"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_Humid"
-        app:layout_constraintVertical_bias="0.471" />
+        app:layout_constraintEnd_toEndOf="@id/button_Humid"
+        app:layout_constraintStart_toStartOf="@id/tv_messagesText"
+        app:layout_constraintTop_toBottomOf="@+id/button_Humid" />
 
     <TextView
         android:id="@+id/tv_messagesText"
@@ -66,9 +67,7 @@
         android:text="@string/messages_textArea"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.861"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.855" />
+        app:layout_constraintStart_toEndOf="@id/guideline"
+        app:layout_constraintTop_toBottomOf="@id/tv_Message" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
