@@ -21,6 +21,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Intent impIntent = getIntent();
+        if("text/plain".equals(impIntent.getType())) {
+            String sensorID = impIntent.getStringExtra(Intent.EXTRA_TEXT);
+            SensorID id = SensorID.valueOf(sensorID);
+            this.sensor = new SensorData(id, values);
+            Intent expIntent = new Intent(this, WeatherActivity.class);
+            expIntent.putExtra("SENSOR_PARCEL", this.sensor);
+            startActivity(expIntent);
+        }
     }
 
     public void onStartHumidity(View view) {
