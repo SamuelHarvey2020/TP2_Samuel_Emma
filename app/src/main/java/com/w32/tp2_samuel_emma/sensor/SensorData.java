@@ -15,11 +15,17 @@ public class SensorData implements Parcelable {
         this.id= id;
     }
 
+    //Lecture / écriture de tableaux : https://stackoverflow.com/questions/10071502/read-writing-arrays-of-parcelable-objects
+    //Lecture / écriture d'enum: https://stackoverflow.com/questions/38174961/how-to-read-and-write-enum-into-parcel-on-android
     protected SensorData(Parcel in) {
+        values = in.createTypedArray(SensorValue.CREATOR);
+        id = (SensorID) in.readSerializable();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeTypedArray(values, 0);
+        dest.writeSerializable(id);
     }
 
     @Override
