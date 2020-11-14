@@ -12,7 +12,6 @@ import com.w32.tp2_samuel_emma.sensor.SensorData;
 import com.w32.tp2_samuel_emma.sensor.SensorValue;
 
 public class WeatherActivity extends AppCompatActivity {
-    //TODO: Affichage du nombre de données
 
     SensorData values;
     SensorValue[] valuesArray;
@@ -22,6 +21,7 @@ public class WeatherActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
+        textView = findViewById(R.id.weatherInfoTxt);
 
         Intent intent = getIntent();
         if (intent.hasExtra("SENSOR_PARCEL")) {
@@ -37,6 +37,7 @@ public class WeatherActivity extends AppCompatActivity {
     }
 
     private int countValues(){
+        // Pourquoi on fait un count si on a valuesArray.length ? hahaha
         int count = 0;
         while (count < valuesArray.length){
             count++;
@@ -46,6 +47,6 @@ public class WeatherActivity extends AppCompatActivity {
 
     private void showDataCount(int count){
         String output = count + " données ont été enregistrées.";
-        textView.setText(output);
+        this.textView.setText(output);
     }
 }

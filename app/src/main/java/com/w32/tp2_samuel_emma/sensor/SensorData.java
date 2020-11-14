@@ -3,13 +3,17 @@ package com.w32.tp2_samuel_emma.sensor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class SensorData implements Parcelable {
     SensorID id = SensorID.TEMPERATURE_ID;
 
     SensorValue[] values;
 
-    public SensorData(SensorID id,
-                      SensorValue[] values)
+    @JsonCreator
+    public SensorData(@JsonProperty("id") SensorID id,
+                      @JsonProperty("datas") SensorValue[] values)
     {
         this.values= values;
         this.id= id;
@@ -45,10 +49,13 @@ public class SensorData implements Parcelable {
         }
     };
 
+    @JsonProperty("datas")
     public SensorValue[] getValues()
     {
         return values;
     }
+
+    @JsonProperty("id")
     public SensorID getId()
     {
         return id;

@@ -2,19 +2,21 @@ package com.w32.tp2_samuel_emma.sensor;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class SensorValue implements Parcelable {
+
     // Valeur sur l'axe de X
     long timeStamp;
 
     // Valeur sur l'axe de Y
     double value;
 
-
-    public SensorValue(long timestamp,
-                       double value)
-    {
-        this.value= value;
+    @JsonCreator
+    public SensorValue(@JsonProperty("timestamp") long timestamp,
+                       @JsonProperty("value")double value) {
+        this.value = value;
         this.timeStamp = timestamp;
     }
 
@@ -35,11 +37,14 @@ public class SensorValue implements Parcelable {
         }
     };
 
+
+    @JsonProperty("timestamp")
     public long getTimeStamp()
     {
         return timeStamp;
     }
 
+    @JsonProperty("value")
     public double getValue()
     {
         return value;
