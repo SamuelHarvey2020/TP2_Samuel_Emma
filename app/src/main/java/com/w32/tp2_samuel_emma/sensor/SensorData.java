@@ -11,6 +11,11 @@ public class SensorData implements Parcelable {
 
     SensorValue[] values;
 
+    /***
+     * Créateur du sensor
+     * @param id : ID du sensor, HUMIDITY_ID ou TEMPERATURE_ID
+     * @param values : tableau de valeurs SensorValue
+     */
     @JsonCreator
     public SensorData(@JsonProperty("id") SensorID id,
                       @JsonProperty("datas") SensorValue[] values)
@@ -19,8 +24,12 @@ public class SensorData implements Parcelable {
         this.id= id;
     }
 
-    //Lecture / écriture de tableaux : https://stackoverflow.com/questions/10071502/read-writing-arrays-of-parcelable-objects
-    //Lecture / écriture d'enum: https://stackoverflow.com/questions/38174961/how-to-read-and-write-enum-into-parcel-on-android
+    /***
+     * Créateur du sensor à partir d'un parcel
+     * SOURCE lecture / écriture de tableaux typés: https://stackoverflow.com/questions/10071502/read-writing-arrays-of-parcelable-objects
+     * SOURCE lecture / écriture d'enum: https://stackoverflow.com/questions/38174961/how-to-read-and-write-enum-into-parcel-on-android
+     * @param in : contenu du parcel
+     */
     protected SensorData(Parcel in) {
         values = in.createTypedArray(SensorValue.CREATOR);
         id = (SensorID) in.readSerializable();

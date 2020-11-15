@@ -1,36 +1,25 @@
 package com.w32.tp2_samuel_emma.activity;
 
 import android.content.Intent;
-import android.hardware.Sensor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.w32.tp2_samuel_emma.R;
 import com.w32.tp2_samuel_emma.sensor.SensorData;
 import com.w32.tp2_samuel_emma.sensor.SensorID;
-import com.w32.tp2_samuel_emma.sensor.SensorValue;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
-import java.io.Writer;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private SensorData sensor;
-    private SensorValue[] values;
     private TextView tvMessages;
 
     @Override
@@ -39,6 +28,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         tvMessages = findViewById(R.id.tv_messagesText);
 
+        if (savedInstanceState != null) {
+            sensor = savedInstanceState.getParcelable("SI_PARCEL_SENSOR");
+            tvMessages.setText(savedInstanceState.getString("SI_TEXT"));
+        }
+
+        //Recherche d'un intent implicite si il y a lieu
         Intent impIntent = getIntent();
         if("text/plain".equals(impIntent.getType())) {
             String sensorID = impIntent.getStringExtra(Intent.EXTRA_TEXT);
@@ -55,6 +50,20 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putParcelable("SI_PARCEL_SENSOR", this.sensor);
+        outState.putString("SI_TEXT", this.tvMessages.getText().toString());
+    }
+
+    /***
+     * Quand le bouton "Start Humidity" est appuyé
+     * Affiche le nombre de données dans l'activité principale et redirige dans la deuxième activité
+     * @param view
+     * @throws IOException : exception JSON
+     */
     public void onStartHumidity(View view) throws IOException {
         Intent intent = new Intent(this, WeatherActivity.class);
         SensorID id = SensorID.HUMIDITY_ID;
@@ -66,6 +75,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /***
+     * Quand le bouton "Start Temperature" est appuyé
+     * Affiche le nombre de données dans l'activité principale et redirige dans la deuxième activité
+     * @param view
+     * @throws IOException : exception JSON
+     */
     public void onStartTemperature(View view) throws IOException {
         Intent intent = new Intent(this, WeatherActivity.class);
         SensorID id = SensorID.TEMPERATURE_ID;
@@ -77,6 +92,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /***
+     * Affichage dans l'activité principale
+     * Affiche le nombre de données et si les données sont valides
+     * @param sensor : sensor contenant les données
+     */
     private void showDataCount(SensorData sensor){
         String output;
         if(sensor.getValues() != null){
@@ -91,14 +111,25 @@ public class MainActivity extends AppCompatActivity {
         this.tvMessages.setText(output);
     }
 
+    /***
+     * Va chercher les données des sensor à partir d'un document JSON
+     * @param id : ID du sensor, HUMIDITY_ID ou TEMPERATURE_ID
+     * @return : le sensor contenant les données
+     * @throws IOException : Exception JSON
+     */
     private SensorData getSensorFromJSON(SensorID id) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
-        SensorData data = objectMapper.readValue(readJson(id), SensorData.class);
-        return data;
+        return objectMapper.readValue(readJson(id), SensorData.class);
     }
 
-    //https://stackoverflow.com/questions/6349759/using-json-file-in-android-app-resources
-    public String readJson(SensorID id) throws IOException {
+    /***
+     * Lis les fichiers JSON
+     * SOURCE CODE: https://stackoverflow.com/questions/6349759/using-json-file-in-android-app-resources
+     * @param id : ID du sensor, HUMIDITY_ID ou TEMPERATURE_ID
+     * @return : un String contenant les données
+     * @throws IOException : exception JSON
+     */
+    private String readJson(SensorID id) throws IOException {
 
         InputStream inputStream = null;
 

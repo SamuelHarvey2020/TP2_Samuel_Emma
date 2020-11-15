@@ -23,6 +23,12 @@ public class WeatherActivity extends AppCompatActivity {
         setContentView(R.layout.activity_weather);
         textView = findViewById(R.id.weatherInfoTxt);
 
+        if (savedInstanceState != null) {
+            values = savedInstanceState.getParcelable("SI_PARCEL_SENSOR");
+            textView.setText(savedInstanceState.getString("SI_TEXT"));
+        }
+
+        //Recherche de l'intent explicite et implicite
         Intent intent = getIntent();
         if (intent.hasExtra("SENSOR_PARCEL")) {
             values = intent.getParcelableExtra("SENSOR_PARCEL");
@@ -32,10 +38,22 @@ public class WeatherActivity extends AppCompatActivity {
         showDataCount(valuesArray.length);
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putParcelable("SI_PARCEL_SENSOR", this.values);
+        outState.putString("SI_TEXT", this.textView.getText().toString());
+    }
+
     public void onGoBack(View view) {
         onBackPressed();
     }
 
+    /***
+     * Affiche dans le TextView le nombre de données reçues
+     * @param count : nombre de données
+     */
     private void showDataCount(int count){
         String output = count + " " + getApplicationContext().getString(R.string.data_read);
         this.textView.setText(output);

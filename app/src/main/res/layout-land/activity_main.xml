@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity">
 
+    <!-- Logo -->
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="252dp"
@@ -25,6 +26,7 @@
         app:layout_constraintGuide_percent="0.4"
         />
 
+    <!-- Bouton humidité -->
     <Button
         android:id="@+id/button_Humid"
         android:layout_width="150dp"
@@ -36,6 +38,7 @@
         app:layout_constraintStart_toStartOf="@id/guideline"
         app:layout_constraintTop_toTopOf="parent"/>
 
+    <!-- Bouton température-->
     <Button
         android:id="@+id/button_Temp"
         android:layout_width="150dp"
@@ -59,6 +62,7 @@
         app:layout_constraintStart_toStartOf="@id/tv_messagesText"
         app:layout_constraintTop_toBottomOf="@+id/button_Humid" />
 
+    <!-- Affichage des données -->
     <TextView
         android:id="@+id/tv_messagesText"
         android:layout_width="370dp"

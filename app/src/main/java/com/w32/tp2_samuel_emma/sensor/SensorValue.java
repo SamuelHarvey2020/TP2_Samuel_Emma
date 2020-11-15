@@ -13,6 +13,11 @@ public class SensorValue implements Parcelable {
     // Valeur sur l'axe de Y
     double value;
 
+    /***
+     * Création d'un sensorValue
+     * @param timestamp : heure
+     * @param value : valeur du sensor
+     */
     @JsonCreator
     public SensorValue(@JsonProperty("timestamp") long timestamp,
                        @JsonProperty("value")double value) {
@@ -20,6 +25,10 @@ public class SensorValue implements Parcelable {
         this.timeStamp = timestamp;
     }
 
+    /***
+     * Créeation d'un sensorValue à partir d'un parcel
+     * @param in : contenu du parcel
+     */
     protected SensorValue(Parcel in) {
         timeStamp = in.readLong();
         value = in.readDouble();
