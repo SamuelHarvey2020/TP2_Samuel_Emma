@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.hardware.Sensor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -30,20 +31,21 @@ public class MainActivity extends AppCompatActivity {
 
     private SensorData sensor;
     private SensorValue[] values;
+    private TextView tvMessages;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        tvMessages = findViewById(R.id.tv_messagesText);
 
         Intent impIntent = getIntent();
         if("text/plain".equals(impIntent.getType())) {
             String sensorID = impIntent.getStringExtra(Intent.EXTRA_TEXT);
             SensorID id = SensorID.valueOf(sensorID);
             try {
-                ObjectMapper objectMapper = new ObjectMapper();
-                SensorData data = objectMapper.readValue(readJson(id), SensorData.class);
-                this.sensor = data;
+                this.sensor = this.getSensorFromJSON(id);
+                showDataCount(sensor);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -53,18 +55,46 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void onStartHumidity(View view) {
+    public void onStartHumidity(View view) throws IOException {
         Intent intent = new Intent(this, WeatherActivity.class);
-        this.sensor = new SensorData(SensorID.HUMIDITY_ID, values);
+        SensorID id = SensorID.HUMIDITY_ID;
+        this.sensor = getSensorFromJSON(id);
+
         intent.putExtra("SENSOR_PARCEL", this.sensor);
+        showDataCount(sensor);
+
         startActivity(intent);
     }
 
-    public void onStartTemperature(View view) {
+    public void onStartTemperature(View view) throws IOException {
         Intent intent = new Intent(this, WeatherActivity.class);
-        this.sensor = new SensorData(SensorID.TEMPERATURE_ID, values);
+        SensorID id = SensorID.TEMPERATURE_ID;
+        this.sensor = getSensorFromJSON(id);
+
         intent.putExtra("SENSOR_PARCEL", this.sensor);
+        showDataCount(sensor);
+
         startActivity(intent);
+    }
+
+    private void showDataCount(SensorData sensor){
+        String output;
+        if(sensor.getValues() != null){
+            int count = sensor.getValues().length;
+            output = getApplicationContext().getString(R.string.success) + "\n" + count + " "
+                    + getApplicationContext().getString(R.string.data_read);
+        }
+        else{
+            output = getApplicationContext().getString(R.string.error);
+        }
+
+        this.tvMessages.setText(output);
+    }
+
+    private SensorData getSensorFromJSON(SensorID id) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        SensorData data = objectMapper.readValue(readJson(id), SensorData.class);
+        return data;
     }
 
     //https://stackoverflow.com/questions/6349759/using-json-file-in-android-app-resources

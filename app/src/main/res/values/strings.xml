@@ -5,5 +5,8 @@
     <string name="Messages">Messages</string>
     <string name="messages_textArea">Something Here</string>
     <string name="no_info_txt">Aucune information enregistrée</string>
-    <string name="btn_goBack" tools:ignore="StringEscaping">Retour</string>
+    <string name="success">Données enregistrées avec succès!</string>
+    <string name="error">Une erreur est survenue pendant le chargement des données.</string>
+    <string name="data_read">données ont été enregistrées.</string>
+    <string name="btn_goBack">Retour</string>
 </resources>

@@ -29,24 +29,15 @@ public class WeatherActivity extends AppCompatActivity {
         }
 
         valuesArray = values.getValues();
-        showDataCount(countValues());
+        showDataCount(valuesArray.length);
     }
 
     public void onGoBack(View view) {
         onBackPressed();
     }
 
-    private int countValues(){
-        // Pourquoi on fait un count si on a valuesArray.length ? hahaha
-        int count = 0;
-        while (count < valuesArray.length){
-            count++;
-        }
-        return count;
-    }
-
     private void showDataCount(int count){
-        String output = count + " données ont été enregistrées.";
+        String output = count + " " + getApplicationContext().getString(R.string.data_read);
         this.textView.setText(output);
     }
 }
