@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         this.sensor = getSensorFromJSON(id);
 
         intent.putExtra("SENSOR_PARCEL", this.sensor);
+
         showDataCount(sensor);
 
         startActivity(intent);
