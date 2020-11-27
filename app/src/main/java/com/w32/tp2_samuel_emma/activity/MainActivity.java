@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
      * @throws IOException : exception JSON
      */
     public void onStartTemperature(View view) throws IOException {
-        Intent intent = new Intent(this, WeatherActivity.class);
+        Intent intent = new Intent(this, TemperatureActivity.class);
         SensorID id = SensorID.TEMPERATURE_ID;
         this.sensor = getSensorFromJSON(id);
 
