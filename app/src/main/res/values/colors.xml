@@ -4,4 +4,10 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="colorDarkGrey">#D3D3D3</color>
+
+    <!-- Activité tempera-->
+    <color name="background">#f4f1de</color>
+    <color name="buttons">#e07a5f</color>
+    <color name="title">#e07a5f</color>
+    <color name="text">#3d405b</color>
 </resources>

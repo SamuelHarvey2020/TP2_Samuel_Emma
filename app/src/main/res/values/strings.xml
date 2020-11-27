@@ -1,4 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Activité principale-->
     <string name="app_name">TP2_Samuel_Emma</string>
     <string name="start_humidity">Start Humidity</string>
     <string name="start_temperature">Start Temperature</string>
@@ -9,4 +10,9 @@
     <string name="error">Une erreur est survenue pendant le chargement des données.</string>
     <string name="data_read">données ont été enregistrées.</string>
     <string name="btn_goBack">Retour</string>
+
+    <!-- Activité température-->
+    <string name="maxTemperature">High limit</string>
+    <string name="minTemperature">Low limit</string>
+    <string name="temparatureWelcome">Temperature values</string>
 </resources>
