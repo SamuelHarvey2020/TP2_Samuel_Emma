@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activity.TemperatureActivity"></activity>
-        <activity android:name=".activity.WeatherActivity"></activity>
+        <activity android:name=".activity.HumidityActivity"></activity>
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
