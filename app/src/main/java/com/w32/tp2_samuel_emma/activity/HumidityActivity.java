@@ -7,11 +7,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.BarGraphSeries;
+import com.jjoe64.graphview.series.DataPoint;
 import com.w32.tp2_samuel_emma.R;
 import com.w32.tp2_samuel_emma.sensor.SensorData;
 import com.w32.tp2_samuel_emma.sensor.SensorValue;
 
-public class WeatherActivity extends AppCompatActivity {
+public class HumidityActivity extends AppCompatActivity {
 
     SensorData values;
     SensorValue[] valuesArray;
@@ -20,7 +23,7 @@ public class WeatherActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_weather);
+        setContentView(R.layout.activity_humidity);
         textView = findViewById(R.id.weatherInfoTxt);
 
         if (savedInstanceState != null) {
@@ -36,6 +39,13 @@ public class WeatherActivity extends AppCompatActivity {
 
         valuesArray = values.getValues();
         showDataCount(valuesArray.length);
+
+        /*
+        GraphView graph = (GraphView) findViewById(R.id.graphHumidity);
+        BarGraphSeries<DataPoint> series = new BarGraphSeries<>(dataPointTable);
+        graph.addSeries(series);
+        series.setSpacing(50);
+        */
     }
 
     @Override

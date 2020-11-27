@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            Intent expIntent = new Intent(this, WeatherActivity.class);
+            Intent expIntent = new Intent(this, HumidityActivity.class);
             expIntent.putExtra("SENSOR_PARCEL", this.sensor);
             startActivity(expIntent);
         }
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
      * @throws IOException : exception JSON
      */
     public void onStartHumidity(View view) throws IOException {
-        Intent intent = new Intent(this, WeatherActivity.class);
+        Intent intent = new Intent(this, HumidityActivity.class);
         SensorID id = SensorID.HUMIDITY_ID;
         this.sensor = getSensorFromJSON(id);
 
