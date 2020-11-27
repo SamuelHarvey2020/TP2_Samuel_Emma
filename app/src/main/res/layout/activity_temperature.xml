@@ -6,61 +6,130 @@
     android:layout_height="match_parent"
     tools:context=".activity.TemperatureActivity">
 
-    <LinearLayout
-        android:id="@+id/graphLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.jjoe64.graphview.GraphView
+    <com.jjoe64.graphview.GraphView
             android:id="@+id/graph"
             android:layout_width="match_parent"
             android:layout_height="200dip"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/layoutGuideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
-
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
+        android:id="@+id/layoutGuideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical" />
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.4"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/textGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.4"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/buttonsGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/graph"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintGuide_percent="0.5"/>
 
     <TextView
-        android:id="@+id/textView4"
-        android:layout_width="match_parent"
+        android:id="@+id/maxTempTxt"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="64dp"
         android:text="TextView"
-        tools:layout_editor_absoluteY="200dp" />
+        app:layout_constraintTop_toTopOf="@id/layoutGuideline"
+        app:layout_constraintBottom_toBottomOf="@id/downMaxTemp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/textGuideline"/>
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
+        android:id="@+id/maxTempNb"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="0"
+        app:layout_constraintTop_toTopOf="@id/upMinTemp"
+        app:layout_constraintBottom_toBottomOf="@id/downMaxTemp"
+        app:layout_constraintStart_toEndOf="@id/textGuideline"
+        app:layout_constraintEnd_toStartOf="@id/buttonsGuideline"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/upMaxTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:layout_marginRight="64dp"
+        android:src="@android:drawable/arrow_up_float"
+        tools:layout_editor_absoluteY="200dp"
+        app:layout_constraintTop_toTopOf="@+id/maxTempTxt"
+        app:layout_constraintBottom_toTopOf="@+id/downMaxTemp"
+        app:layout_constraintStart_toStartOf="@id/buttonsGuideline"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/downMaxTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:layout_marginRight="64dp"
+        android:src="@android:drawable/arrow_down_float"
+        app:layout_constraintTop_toBottomOf="@+id/upMaxTemp"
+        app:layout_constraintBottom_toBottomOf="@+id/maxTempTxt"
+        app:layout_constraintStart_toStartOf="@id/buttonsGuideline"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <TextView
+        android:id="@+id/minTempTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="64dp"
         android:text="TextView"
-        tools:layout_editor_absoluteY="200dp" />
+        app:layout_constraintTop_toBottomOf="@id/downMaxTemp"
+        app:layout_constraintBottom_toBottomOf="@id/downMinTemp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/textGuideline"/>
+
+    <TextView
+        android:id="@+id/minTempNb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        app:layout_constraintTop_toTopOf="@id/upMinTemp"
+        app:layout_constraintBottom_toBottomOf="@id/downMinTemp"
+        app:layout_constraintStart_toEndOf="@id/textGuideline"
+        app:layout_constraintEnd_toStartOf="@id/buttonsGuideline"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/upMinTemp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
+        android:layout_marginRight="64dp"
         android:src="@android:drawable/arrow_up_float"
-        tools:layout_editor_absoluteY="200dp" />
+        tools:layout_editor_absoluteY="200dp"
+        app:layout_constraintTop_toTopOf="@+id/minTempTxt"
+        app:layout_constraintBottom_toTopOf="@+id/downMinTemp"
+        app:layout_constraintStart_toStartOf="@id/buttonsGuideline"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/downMinTemp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
+        android:layout_marginRight="64dp"
         android:src="@android:drawable/arrow_down_float"
-        tools:layout_editor_absoluteY="200dp" />
+        app:layout_constraintTop_toBottomOf="@+id/upMinTemp"
+        app:layout_constraintBottom_toBottomOf="@+id/minTempTxt"
+        app:layout_constraintStart_toStartOf="@id/buttonsGuideline"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
