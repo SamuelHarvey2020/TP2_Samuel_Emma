@@ -11,6 +11,7 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
 import com.w32.tp2_samuel_emma.R;
+import com.w32.tp2_samuel_emma.model.ModelControllerHumidity;
 import com.w32.tp2_samuel_emma.sensor.SensorData;
 import com.w32.tp2_samuel_emma.sensor.SensorValue;
 
@@ -40,12 +41,12 @@ public class HumidityActivity extends AppCompatActivity {
         valuesArray = values.getValues();
         showDataCount(valuesArray.length);
 
-        /*
+
         GraphView graph = (GraphView) findViewById(R.id.graphHumidity);
-        BarGraphSeries<DataPoint> series = new BarGraphSeries<>(dataPointTable);
+        BarGraphSeries<DataPoint> series = ModelControllerHumidity.getSeries();
         graph.addSeries(series);
         series.setSpacing(50);
-        */
+
     }
 
     @Override

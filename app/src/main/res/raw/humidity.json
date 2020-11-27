@@ -11,10 +11,6 @@
         "value": 56.3
       },
       {
-        "timestamp": 12,
-        "value": 53.3
-      },
-      {
         "timestamp": 3,
         "value": 54.6
       },
@@ -49,6 +45,10 @@
       {
         "timestamp": 11,
         "value": 70.3
+      },
+      {
+        "timestamp": 12,
+        "value": 53.3
       }
     ]
   }
