@@ -3,6 +3,7 @@ package com.w32.tp2_samuel_emma.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -29,6 +30,8 @@ public class TemperatureActivity extends AppCompatActivity {
     ImageButton downMinBtn;
     private TextView maxTxt;
     private TextView minTxt;
+    private LineGraphSeries<DataPoint> maxSeries;
+    private LineGraphSeries<DataPoint> minSeries;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,31 +50,79 @@ public class TemperatureActivity extends AppCompatActivity {
 
         if (savedInstanceState != null) {
             values = savedInstanceState.getParcelable("SI_PARCEL_SENSOR");
+            controller = new ModelControllerTemperature(values);
+            controller.setHighLimit(savedInstanceState.getDouble("MAX_TEMP"));
+            controller.setLowLimit(savedInstanceState.getDouble("MIN_TEMP"));
         }
 
         //Recherche de l'intent explicite et implicite
         Intent intent = getIntent();
         if (intent.hasExtra("SENSOR_PARCEL")) {
             values = intent.getParcelableExtra("SENSOR_PARCEL");
+            controller = new ModelControllerTemperature(values);
         }
 
-        controller = new ModelControllerTemperature(values);
         updateTextCount();
         addGraphData();
     }
 
+    /**
+     * Ajoute les valeurs de SensorData dans le graphique
+     */
     private void addGraphData(){
-        DataPoint[] data = new DataPoint[values.getValues().length];
+        DataPoint[] temperatureData = new DataPoint[values.getValues().length];
+
         int i = 0;
         for(SensorValue sensorValues: values.getValues()){
-            data[i] = new DataPoint(sensorValues.getTimeStamp(), sensorValues.getValue());
+            temperatureData[i] = new DataPoint(sensorValues.getTimeStamp(), sensorValues.getValue());
             i++;
         }
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(data);
-        graph.addSeries(series);
+
+        LineGraphSeries<DataPoint> temperatureSeries = new LineGraphSeries<DataPoint>(temperatureData);
+        temperatureSeries.setTitle(getResources().getString(R.string.temperatureWelcome));
+        temperatureSeries.setColor(Color.BLACK);
+        temperatureSeries.setDrawDataPoints(true);
+
+        updateMaxAndMinGraph();
+
+        graph.addSeries(temperatureSeries);
         graph.getLegendRenderer().setVisible(true);
     }
 
+    /**
+     * Ajoute et modifie les valeurs maximales et minimales dans le graphique
+     */
+    private void updateMaxAndMinGraph(){
+        //Les valeurs entrées précédement sont supprimées si elles existaient déjà
+        graph.removeSeries(maxSeries);
+        graph.removeSeries(minSeries);
+
+        long maxTimeStamp = values.getValues()[values.getValues().length - 1].getTimeStamp();
+        DataPoint[] maxTemperatureData = new DataPoint[2];
+        DataPoint[] minTemperatureData = new DataPoint[2];
+
+        //Ajout des valeurs
+        maxTemperatureData[0] = new DataPoint(0, controller.getHighLimit());
+        maxTemperatureData[1] = new DataPoint(maxTimeStamp, controller.getHighLimit());
+        minTemperatureData[0] = new DataPoint(0, controller.getLowLimit());
+        minTemperatureData[1] = new DataPoint(maxTimeStamp, controller.getLowLimit());
+
+        //Ajout des données dans le graphique
+        maxSeries = new LineGraphSeries<>(maxTemperatureData);
+        maxSeries.setTitle(getResources().getString(R.string.maxTemperature));
+        maxSeries.setColor(Color.BLUE);
+
+        minSeries = new LineGraphSeries<>(minTemperatureData);
+        minSeries.setTitle(getResources().getString(R.string.minTemperature));
+        minSeries.setColor(Color.RED);
+
+        graph.addSeries(maxSeries);
+        graph.addSeries(minSeries);
+    }
+
+    /**
+     * Modifie les champs de textes avec les valeurs minimales et maximales
+     */
     private void updateTextCount(){
         maxTxt.setText(Double.toString(controller.getHighLimit()));
         minTxt.setText(Double.toString(controller.getLowLimit()));
@@ -80,20 +131,33 @@ public class TemperatureActivity extends AppCompatActivity {
     public void onUpMaxButton(View view) {
         controller.onHighLimitUp();
         updateTextCount();
+        updateMaxAndMinGraph();
     }
 
     public void onUpMinButton(View view) {
         controller.onLowLimitUp();
         updateTextCount();
+        updateMaxAndMinGraph();
     }
 
     public void onDownMaxButton(View view) {
         controller.onHighLimitDown();
         updateTextCount();
+        updateMaxAndMinGraph();
     }
 
     public void onDownMinButton(View view) {
         controller.onLowLimitDown();
         updateTextCount();
+        updateMaxAndMinGraph();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putParcelable("SI_PARCEL_SENSOR", this.values);
+        outState.putDouble("MAX_TEMP", controller.getHighLimit());
+        outState.putDouble("MIN_TEMP", controller.getLowLimit());
     }
 }

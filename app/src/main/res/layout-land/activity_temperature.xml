@@ -1,6 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".activity.TemperatureActivity">
+
+    <TextView
+        android:id="@+id/temperatureWelcomeTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/temperatureWelcome"
+        android:textColor="@color/title"
+        android:layout_marginTop="16dp"
+        android:textSize="32dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/graph"
+        app:layout_constraintEnd_toEndOf="@+id/graphGuideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="24dp"
+        android:alpha="0.5"
+        app:srcCompat="@drawable/cloud"
+        app:layout_constraintTop_toTopOf="@+id/graph"
+        app:layout_constraintBottom_toBottomOf="@+id/graph"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/graphGuideline"/>
+
+    <com.jjoe64.graphview.GraphView
+        android:id="@+id/graph"
+        android:layout_width="0dp"
+        android:layout_height="200dip"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/graphGuideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/temperatureWelcomeTxt" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/graphGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.6"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/textGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.7"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/buttonsGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/graph"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintGuide_percent="0.8"/>
+
+    <TextView
+        android:id="@+id/maxTempTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:textColor="@color/text"
+        android:textSize="16dp"
+        android:text="@string/maxTemperature"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/downMaxTemp"
+        app:layout_constraintStart_toStartOf="@+id/graphGuideline"
+        app:layout_constraintEnd_toStartOf="@id/textGuideline"
+        app:layout_constraintVertical_chainStyle="packed"/>
+
+    <TextView
+        android:id="@+id/maxTempNb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text"
+        android:textSize="16dp"
+        android:text="0"
+        app:layout_constraintTop_toTopOf="@id/maxTempTxt"
+        app:layout_constraintBottom_toBottomOf="@id/maxTempTxt"
+        app:layout_constraintStart_toEndOf="@id/textGuideline"
+        app:layout_constraintEnd_toStartOf="@id/buttonsGuideline"/>
+
+    <ImageButton
+        android:id="@+id/upMaxTemp"
+        android:layout_width="120dp"
+        android:layout_height="54dp"
+        android:backgroundTint="@color/buttons"
+        android:clickable="true"
+        android:onClick="onUpMaxButton"
+        app:layout_constraintBottom_toTopOf="@+id/downMaxTemp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/buttonsGuideline"
+        app:layout_constraintTop_toTopOf="@+id/maxTempTxt"
+        app:srcCompat="@android:drawable/arrow_up_float" />
+
+    <ImageButton
+        android:id="@+id/downMaxTemp"
+        android:layout_width="120dp"
+        android:layout_height="54dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/buttons"
+        android:clickable="true"
+        android:onClick="onDownMaxButton"
+        app:layout_constraintBottom_toBottomOf="@+id/maxTempTxt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/buttonsGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/upMaxTemp"
+        app:srcCompat="@android:drawable/arrow_down_float" />
+
+    <TextView
+        android:id="@+id/minTempTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text"
+        android:textSize="16dp"
+        android:text="@string/minTemperature"
+        app:layout_constraintTop_toBottomOf="@id/maxTempTxt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/graphGuideline"
+        app:layout_constraintEnd_toStartOf="@id/textGuideline"/>
+
+    <TextView
+        android:id="@+id/minTempNb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text"
+        android:textSize="16dp"
+        android:text="0"
+        app:layout_constraintTop_toTopOf="@id/minTempTxt"
+        app:layout_constraintBottom_toBottomOf="@id/minTempTxt"
+        app:layout_constraintStart_toEndOf="@id/textGuideline"
+        app:layout_constraintEnd_toStartOf="@id/buttonsGuideline"/>
+
+    <ImageButton
+        android:id="@+id/upMinTemp"
+        android:layout_width="120dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/buttons"
+        android:clickable="true"
+        android:onClick="onUpMinButton"
+        app:layout_constraintBottom_toTopOf="@+id/downMinTemp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/buttonsGuideline"
+        app:layout_constraintTop_toTopOf="@+id/minTempTxt"
+        app:srcCompat="@android:drawable/arrow_up_float" />
+
+    <ImageButton
+        android:id="@+id/downMinTemp"
+        android:layout_width="120dp"
+        android:layout_height="54dp"
+        android:backgroundTint="@color/buttons"
+        android:clickable="true"
+        android:onClick="onDownMinButton"
+        app:layout_constraintBottom_toBottomOf="@+id/minTempTxt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/buttonsGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/upMinTemp"
+        app:srcCompat="@android:drawable/arrow_down_float" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

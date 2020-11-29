@@ -34,7 +34,7 @@ public class ModelControllerTemperature{
     public void setLowLimit(double lowLimit)
     {
         this.minValue = lowLimit;
-    }	
+    }
 
     public double getLowLimit()
     {
@@ -67,6 +67,10 @@ public class ModelControllerTemperature{
         }
     }
 
+    /**
+     *
+     * @return une liste avec toutes les valeurs
+     */
     private List<Double> valuesToArrayList(){
         List<Double> list = new ArrayList<Double>();
         for (int i = 0; i < valuesArray.length; i++) {

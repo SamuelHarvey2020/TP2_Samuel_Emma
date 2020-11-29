@@ -11,7 +11,7 @@
         android:id="@+id/temperatureWelcomeTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/temparatureWelcome"
+        android:text="@string/temperatureWelcome"
         android:textColor="@color/title"
         android:layout_marginTop="16dp"
         android:textSize="32dp"

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Activité température-->
+    <string name="maxTemperature">Limite max</string>
+    <string name="minTemperature">Limite min</string>
+    <string name="temperatureWelcome">Valeurs de température</string>
+    <string name="start_humidity">Humidité</string>
+    <string name="start_temperature">Température</string>
+    <string name="messages_textArea">Messages ici</string>
+</resources>
