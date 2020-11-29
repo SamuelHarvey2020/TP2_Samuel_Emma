@@ -12,6 +12,7 @@ import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
 import com.w32.tp2_samuel_emma.R;
 import com.w32.tp2_samuel_emma.model.ModelControllerHumidity;
+import com.w32.tp2_samuel_emma.model.ModelControllerTemperature;
 import com.w32.tp2_samuel_emma.sensor.SensorData;
 import com.w32.tp2_samuel_emma.sensor.SensorValue;
 
@@ -20,6 +21,7 @@ public class HumidityActivity extends AppCompatActivity {
     SensorData values;
     SensorValue[] valuesArray;
     private TextView textView;
+    ModelControllerHumidity controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +43,7 @@ public class HumidityActivity extends AppCompatActivity {
         valuesArray = values.getValues();
         showDataCount(valuesArray.length);
 
-
+        controller = new ModelControllerHumidity(values);
         GraphView graph = (GraphView) findViewById(R.id.graphHumidity);
         BarGraphSeries<DataPoint> series = ModelControllerHumidity.getSeries();
         graph.addSeries(series);
