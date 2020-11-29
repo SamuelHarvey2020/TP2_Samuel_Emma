@@ -9,20 +9,29 @@ import com.w32.tp2_samuel_emma.sensor.SensorValue;
 public class ModelControllerHumidity {
 	public static final double EPSILON = 0.001;
     private static BarGraphSeries<DataPoint> series;
-    private int nbZones = 5;
+    private double highestValue;
+    private double lowestValue;
+    private int nbZones = 1;
+    double zoneSpan;
 	private SensorValue[] sensorDataValues;
-	private DataPoint[] dataPointTable ;
+
 	//Les méthodes méthodes suivantes sont TOUTES OBLIGATOIRES et leurs signatures DE DOIVENT PAS être modifiées
     public ModelControllerHumidity(SensorData p)
     {
 		// A COMPLETER
         this.sensorDataValues = p.getValues();
         double span = this.calculateSpan();
-        double zoneSpan = span / nbZones;
+        this.zoneSpan = span / nbZones;
 
-        this.series = new BarGraphSeries<>(new DataPoint[]{
-                new DataPoint(1,12)
-        });
+        this.series = new BarGraphSeries<DataPoint>();
+
+        int counter = 0;
+        while(counter != nbZones){
+            counter ++;
+            int countInZone = getCountInZone(counter);
+            series.appendData(new DataPoint(counter,countInZone), true, nbZones);
+        }
+
     }
 
     private double calculateSpan() {
@@ -45,45 +54,58 @@ public class ModelControllerHumidity {
                 lowestValue = doubleValues[i];
             }
         }
+        this.highestValue = highestValue;
+        this.lowestValue = lowestValue;
+
 
         double span = highestValue - lowestValue;
         return span;
     }
 
     public static BarGraphSeries<DataPoint> getSeries() {
-
         return series;
     }
 
     public void setNbZones(int nbZones)
     {
-        // A COMPLETER
         this.nbZones = nbZones;
     }
 
     public int getNbZones()
     {
-		// A COMPLETER
 		return this.nbZones;
     }
 
 
     public int getCountInZone(int zone)
     {
-		// A COMPLETER        
-		return 0;
+		// A COMPLETER
+        int zoneCount = 0;
+
+        double[] doubleValues = new double[12];
+        int counter = 0;
+        for (SensorValue value:this.sensorDataValues) {
+            doubleValues[counter] = value.getValue();
+            counter++;
+        }
+
+        for (int i = 0; i< doubleValues.length; i++){
+            if (doubleValues[i] >= getLowerLimit(zone) && doubleValues[i] <= getUpperLimit(zone)-EPSILON){
+                zoneCount++;
+            }
+        }
+
+		return zoneCount;
     }
 
     public double getUpperLimit(int zone)
     {
-        // A COMPLETER
-		return 0;
+		return (this.lowestValue * (zone+1));
     }
 
     public double getLowerLimit(int zone)
     {
-        // A COMPLETER
-		return 0;
+		return (this.lowestValue * zone);
     }
 
 
