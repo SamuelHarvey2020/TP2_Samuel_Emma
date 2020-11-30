@@ -7,4 +7,10 @@
     <string name="start_humidity">Humidité</string>
     <string name="start_temperature">Température</string>
     <string name="messages_textArea">Messages ici</string>
+
+    <!-- Activité température-->
+    <string name="HumidityWelcome">Valeurs d\'humiditée</string>
+    <string name="nbZones">Nombre de zones :</string>
+    <string name="zone_info">Info sur la zone</string>
+
 </resources>

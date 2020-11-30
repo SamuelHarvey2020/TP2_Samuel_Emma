@@ -4,27 +4,160 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroundH"
     tools:context=".activity.HumidityActivity">
 
-    <!-- Affichage des données -->
+    <TextView
+        android:id="@+id/HumidityWelcomeTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/HumidityWelcome"
+        android:textColor="@color/titleH"
+        android:layout_marginTop="16dp"
+        android:textSize="32dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/graph"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Affichage des données-->
+
+    <!-- Bouton retour -->
+
+    <Spinner
+        android:id="@+id/Zones"
+        android:layout_width="78dp"
+        android:layout_height="47dp"
+        android:entries="@array/zones"
+        app:layout_constraintBottom_toTopOf="@+id/weatherInfoTxt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.175"
+        app:layout_constraintStart_toEndOf="@+id/lblEnterZoneForData"
+        app:layout_constraintTop_toBottomOf="@+id/txtEnterNbZones"
+        app:layout_constraintVertical_bias="0.309" />
+
     <TextView
         android:id="@+id/weatherInfoTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/no_info_txt"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintVertical_bias="0.845" />
 
-    <!-- Bouton retour -->
+
+    <TextView
+        android:id="@+id/lblEnterNbZones"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="Nombre de zones :"
+        app:layout_constraintBottom_toTopOf="@+id/weatherInfoTxt"
+        app:layout_constraintEnd_toStartOf="@+id/buttonApply"
+        app:layout_constraintHorizontal_bias="0.173"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/graphHumidity"
+        app:layout_constraintVertical_bias="0.198" />
+
+    <TextView
+        android:id="@+id/lblEnterZoneForData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/zone_info"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/weatherInfoTxt"
+        app:layout_constraintEnd_toStartOf="@+id/buttonApply"
+        app:layout_constraintHorizontal_bias="0.152"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/graphHumidity"
+        app:layout_constraintVertical_bias="0.556" />
+
+    <EditText
+        android:id="@+id/txtEnterNbZones"
+        android:layout_width="63dp"
+        android:layout_height="38dp"
+        android:inputType="number"
+        android:textSize="14sp"
+        android:text="5"
+        app:layout_constraintBaseline_toBaselineOf="@id/lblEnterNbZones"
+        app:layout_constraintEnd_toStartOf="@id/buttonApply"
+        app:layout_constraintLeft_toRightOf="@id/lblEnterNbZones"
+        app:layout_constraintStart_toEndOf="@id/lblEnterNbZones" />
+
+    <TextView
+        android:id="@+id/lblMinValue"
+        android:layout_width="87dp"
+        android:layout_height="34dp"
+        android:text="@string/minTemperature"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/weatherInfoTxt"
+        app:layout_constraintEnd_toStartOf="@+id/buttonApply"
+        app:layout_constraintHorizontal_bias="0.113"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblEnterZoneForData"
+        app:layout_constraintVertical_bias="0.796" />
+
+    <TextView
+        android:id="@+id/txtMinValue"
+        android:layout_width="75dp"
+        android:layout_height="45dp"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/weatherInfoTxt"
+        app:layout_constraintEnd_toStartOf="@+id/buttonApply"
+        app:layout_constraintHorizontal_bias="0.548"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblEnterZoneForData"
+        app:layout_constraintVertical_bias="0.873" />
+
+    <TextView
+        android:id="@+id/txtMaxValue"
+        android:layout_width="75dp"
+        android:layout_height="45dp"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/weatherInfoTxt"
+        app:layout_constraintEnd_toEndOf="@+id/buttonApply"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblEnterZoneForData"
+        app:layout_constraintVertical_bias="0.873" />
+
+    <TextView
+        android:id="@+id/lblMaxValue"
+        android:layout_width="87dp"
+        android:layout_height="34dp"
+        android:text="@string/maxTemperature"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/weatherInfoTxt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.459"
+        app:layout_constraintStart_toEndOf="@+id/lblMinValue"
+        app:layout_constraintTop_toBottomOf="@+id/lblEnterZoneForData"
+        app:layout_constraintVertical_bias="0.796" />
+
+    <Button
+        android:id="@+id/buttonApply"
+        android:layout_width="89dp"
+        android:layout_height="67dp"
+        android:layout_margin="32dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/titleH"
+        android:onClick="onApplyClicked"
+        android:text="Apply"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/graphHumidity" />
+
     <Button
         android:id="@+id/button"
         android:onClick="onGoBack"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="32dp"
-        android:background="@color/colorDarkGrey"
+        android:background="@color/titleH"
         android:text="@string/btn_goBack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,12 +165,12 @@
 
     <com.jjoe64.graphview.GraphView
         android:id="@+id/graphHumidity"
-        android:layout_width="match_parent"
-        android:layout_height="200dip"
-        app:layout_constraintBottom_toTopOf="@+id/weatherInfoTxt"
+        android:layout_width="354dp"
+        android:layout_height="189dp"
+        android:layout_margin="32dp"
+        android:title="Sensor data for Humidity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:title="Sensor data for Humidity"/>
+        app:layout_constraintTop_toBottomOf="@+id/HumidityWelcomeTxt" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

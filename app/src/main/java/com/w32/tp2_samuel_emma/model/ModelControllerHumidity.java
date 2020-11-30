@@ -8,62 +8,18 @@ import com.w32.tp2_samuel_emma.sensor.SensorValue;
 //Complétez l'implémentation de la classe avec les méthodes et attributs nécessaires à son fonctionnement
 public class ModelControllerHumidity {
 	public static final double EPSILON = 0.001;
-    private static BarGraphSeries<DataPoint> series;
-    private double highestValue;
+    public static BarGraphSeries<DataPoint> series;
     private double lowestValue;
-    private int nbZones = 1;
-    double zoneSpan;
+    private int nbZones = 5;
+    private double zoneSpan;
 	private SensorValue[] sensorDataValues;
+    private int selectedZone;
 
-	//Les méthodes méthodes suivantes sont TOUTES OBLIGATOIRES et leurs signatures DE DOIVENT PAS être modifiées
+    //Les méthodes méthodes suivantes sont TOUTES OBLIGATOIRES et leurs signatures DE DOIVENT PAS être modifiées
     public ModelControllerHumidity(SensorData p)
     {
-		// A COMPLETER
         this.sensorDataValues = p.getValues();
-        double span = this.calculateSpan();
-        this.zoneSpan = span / nbZones;
-
-        this.series = new BarGraphSeries<DataPoint>();
-
-        int counter = 0;
-        while(counter != nbZones){
-            counter ++;
-            int countInZone = getCountInZone(counter);
-            series.appendData(new DataPoint(counter,countInZone), true, nbZones);
-        }
-
-    }
-
-    private double calculateSpan() {
-
-        double[] doubleValues = new double[12];
-        int counter = 0;
-        for (SensorValue value:this.sensorDataValues) {
-            doubleValues[counter] = value.getValue();
-            counter++;
-        }
-
-        double highestValue = -273.15;  // valeur de la plus basse température possible
-        double lowestValue = 1000;      // haute température pour etre sur
-        for(int i = 0;i < doubleValues.length; i++){
-
-            if (doubleValues[i] > highestValue){
-                highestValue = doubleValues[i];
-            }
-            if (doubleValues[i] < lowestValue){
-                lowestValue = doubleValues[i];
-            }
-        }
-        this.highestValue = highestValue;
-        this.lowestValue = lowestValue;
-
-
-        double span = highestValue - lowestValue;
-        return span;
-    }
-
-    public static BarGraphSeries<DataPoint> getSeries() {
-        return series;
+        this.selectedZone = 1;
     }
 
     public void setNbZones(int nbZones)
@@ -75,7 +31,6 @@ public class ModelControllerHumidity {
     {
 		return this.nbZones;
     }
-
 
     public int getCountInZone(int zone)
     {
@@ -90,7 +45,14 @@ public class ModelControllerHumidity {
         }
 
         for (int i = 0; i< doubleValues.length; i++){
-            if (doubleValues[i] >= getLowerLimit(zone) && doubleValues[i] <= getUpperLimit(zone)-EPSILON){
+            if(zone == nbZones){
+                if (doubleValues[i] >= getLowerLimit(zone) &&
+                    doubleValues[i] <= getUpperLimit(zone)) {
+                    zoneCount++;
+                }
+            }
+            else if (doubleValues[i] >= getLowerLimit(zone) &&
+                doubleValues[i] <= getUpperLimit(zone)-EPSILON){
                 zoneCount++;
             }
         }
@@ -100,23 +62,31 @@ public class ModelControllerHumidity {
 
     public double getUpperLimit(int zone)
     {
-		return (this.lowestValue * (zone+1));
+        double upLimit = (this.getLowerLimit(zone) + zoneSpan);
+		return upLimit;
     }
 
     public double getLowerLimit(int zone)
     {
-		return (this.lowestValue * zone);
+        double lowLimit = (this.lowestValue + (zoneSpan*(zone-1)));
+		return lowLimit;
     }
 
 
     public int getSelectedZone()
     {
-        // A COMPLETER
-		return 0;
+		return this.selectedZone;
     }
 
     public void setSelectedZone(int selectedZone)
     {
-        // A COMPLETER
+        this.selectedZone = selectedZone;
+    }
+
+    public void setLowestValue(double lowestValue) {
+        this.lowestValue = lowestValue;
+    }
+    public void setZoneSpan(double zoneSpan){
+        this.zoneSpan = zoneSpan;
     }
 }
