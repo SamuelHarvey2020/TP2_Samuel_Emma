@@ -1,4 +1,4 @@
-package com.w32.tp2_samuel_emma.model;
+package com.w32.tp2_samuel_emma.controller;
 
 import com.w32.tp2_samuel_emma.sensor.SensorData;
 import com.w32.tp2_samuel_emma.sensor.SensorValue;

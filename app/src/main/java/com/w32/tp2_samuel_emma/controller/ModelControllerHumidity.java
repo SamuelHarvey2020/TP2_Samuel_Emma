@@ -1,4 +1,4 @@
-package com.w32.tp2_samuel_emma.model;
+package com.w32.tp2_samuel_emma.controller;
 
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
