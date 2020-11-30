@@ -69,9 +69,11 @@ public class HumidityActivity extends AppCompatActivity {
         controller.setSelectedZone(zone);
 
         displayMinAndMaxValues();
-        //this.series = ModelControllerHumidity.getSeries();
     }
 
+    /**
+     * Détermine les valeurs pertinentes afin de créér le graphique par la suite
+     */
     private void createGraph() {
         graph.removeSeries(this.series);
 
@@ -81,9 +83,6 @@ public class HumidityActivity extends AppCompatActivity {
         controller.setZoneSpan(this.zoneSpan);
 
         this.series = new BarGraphSeries<DataPoint>();
-
-        //Valeur de défault pour la premiere colone coupée
-        //series.appendData(new DataPoint(0,0), true, 10);
 
         int counter = 0;
         while(counter != controller.getNbZones()){
@@ -106,6 +105,11 @@ public class HumidityActivity extends AppCompatActivity {
         graph.getViewport().setMaxY(14-controller.getNbZones());
     }
 
+
+    /**
+     * Calcule l'étendue des données avec les données du sensor
+     *
+     */
     public double calculateSpan() {
 
         double[] doubleValues = new double[12];
@@ -127,13 +131,15 @@ public class HumidityActivity extends AppCompatActivity {
             }
         }
 
-        //this.highestValue = highestValue;
         controller.setLowestValue(lowestValue);
 
         double span = highestValue - lowestValue;
         return span;
     }
 
+    /**
+     * Affiche les données des valeurs minimales et maximales pour une zone spécifique du graphique
+     */
     private void displayMinAndMaxValues() {
         int zone = controller.getSelectedZone();
         tvMin.setText(String.valueOf(controller.getLowerLimit(zone)));
@@ -143,9 +149,12 @@ public class HumidityActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        int zone = controller.getSelectedZone();
 
         outState.putParcelable("SI_PARCEL_SENSOR", this.values);
         outState.putString("SI_TEXT", this.textView.getText().toString());
+        outState.putDouble("MAX_TEMP", controller.getUpperLimit(zone));
+        outState.putDouble("MIN_TEMP", controller.getLowerLimit(zone));
     }
 
     public void onGoBack(View view) {
@@ -161,6 +170,9 @@ public class HumidityActivity extends AppCompatActivity {
         this.textView.setText(output);
     }
 
+    /**
+     * Apelle les fonctions qui modifient les données afin d'effectuer le click du boutton
+     */
     public void onApplyClicked(View view){
         onSelectNbZones();
         onDisplayZone();
@@ -179,7 +191,9 @@ public class HumidityActivity extends AppCompatActivity {
         controller.setSelectedZone(zone);
         displayMinAndMaxValues();
     }
-
+    /**
+     * Retire la série courante et crée un nouveau graphique
+     */
     private void updateGraph() {
         this.graph.removeSeries(this.series);
         this.series = null;

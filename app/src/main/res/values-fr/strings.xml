@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Activité température-->
+    <!-- Deux Activitées -->
     <string name="maxTemperature">Limite max</string>
     <string name="minTemperature">Limite min</string>
+
+    <!-- Activité température-->
     <string name="temperatureWelcome">Valeurs de température</string>
     <string name="start_humidity">Humidité</string>
     <string name="start_temperature">Température</string>
@@ -12,5 +14,6 @@
     <string name="HumidityWelcome">Valeurs d\'humiditée</string>
     <string name="nbZones">Nombre de zones :</string>
     <string name="zone_info">Info sur la zone</string>
+    <string name="Apply">Appliquer</string>
 
 </resources>
