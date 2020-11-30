@@ -68,6 +68,7 @@ public class TemperatureActivity extends AppCompatActivity {
 
     /**
      * Ajoute les valeurs de SensorData dans le graphique
+     * documentation sur les graphiques consultée: https://github.com/jjoe64/GraphView/wiki/Simple-graph
      */
     private void addGraphData(){
         DataPoint[] temperatureData = new DataPoint[values.getValues().length];

@@ -97,9 +97,9 @@ public class ModelControllerTemperature{
      * @return une liste avec toutes les valeurs
      */
     private List<Double> valuesToArrayList(){
-        List<Double> list = new ArrayList<Double>();
-        for (int i = 0; i < valuesArray.length; i++) {
-            list.add(valuesArray[i].getValue());
+        List<Double> list = new ArrayList<>();
+        for (SensorValue sensorValue : valuesArray) {
+            list.add(sensorValue.getValue());
         }
         return list;
     }

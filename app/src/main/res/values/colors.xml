@@ -5,10 +5,12 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="colorDarkGrey">#D3D3D3</color>
 
-    <!-- Activité tempera-->
+    <!-- Activité temperature-->
     <color name="background">#f4f1de</color>
     <color name="buttons">#e07a5f</color>
     <color name="title">#e07a5f</color>
+
+    <!-- Activité humidite-->
     <color name="backgroundH">#B8E2F2</color>
     <color name="titleH">#1b667e</color>
     <color name="sapphire">#0F52BA</color>
