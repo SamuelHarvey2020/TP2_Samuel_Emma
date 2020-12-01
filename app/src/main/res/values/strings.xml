@@ -31,4 +31,11 @@
         <item>5</item>
     </string-array>
 
+    <!-- Activité DataStats -->
+    <string name="statsTitle">Sensor stats</string>
+    <string name="humidityBtn">Humidity</string>
+    <string name="temparatureBtn">Temperature</string>
+    <string name="timeStamp">Current date:</string>
+    <string name="backHome">Back to main menu</string>
+
 </resources>

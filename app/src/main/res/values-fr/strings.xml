@@ -15,5 +15,10 @@
     <string name="nbZones">Nombre de zones :</string>
     <string name="zone_info">Info sur la zone</string>
     <string name="Apply">Appliquer</string>
+    <string name="statsTitle">Statistiques sensor</string>
+    <string name="humidityBtn">Humidité</string>
+    <string name="temparatureBtn">Température</string>
+    <string name="timeStamp">Date:</string>
+    <string name="backHome">Retour au menu principal</string>
 
 </resources>
