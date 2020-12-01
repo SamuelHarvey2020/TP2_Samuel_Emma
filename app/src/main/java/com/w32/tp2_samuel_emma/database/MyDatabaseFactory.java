@@ -30,3 +30,4 @@ public class MyDatabaseFactory extends SQLiteOpenHelper {
         db.execSQL(SensorDataStatsTable.DROP_TABLE_SQL);
         onCreate(db);
     }
+}
