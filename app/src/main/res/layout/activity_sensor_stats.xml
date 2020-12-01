@@ -6,4 +6,104 @@
     android:layout_height="match_parent"
     tools:context=".activity.SensorStats">
 
+    <TextView
+        android:id="@+id/sensorTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/statsTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/radioGroup"/>
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sensorTitle"
+        app:layout_constraintBottom_toTopOf="@+id/timeStampTxt">
+
+        <RadioButton
+            android:id="@+id/humidityBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/humidityBtn" />
+
+        <RadioButton
+            android:id="@+id/temperatureBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/temparatureBtn" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/timeStampTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/timeStamp"
+        app:layout_constraintBottom_toTopOf="@+id/maxTxt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+        app:layout_constraintEnd_toStartOf="@+id/timeStampSpinner"/>
+
+    <Spinner
+        android:id="@+id/timeStampSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/timeStampTxt"
+        app:layout_constraintTop_toTopOf="@+id/timeStampTxt"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/maxTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/maxTemperature"
+        app:layout_constraintTop_toBottomOf="@+id/timeStampTxt"
+        app:layout_constraintStart_toStartOf="@+id/timeStampTxt"
+        app:layout_constraintEnd_toEndOf="@+id/timeStampTxt"
+        app:layout_constraintBottom_toTopOf="@+id/minTxt"/>
+
+    <TextView
+        android:id="@+id/maxValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/maxTxt"
+        app:layout_constraintBottom_toBottomOf="@+id/maxTxt"
+        app:layout_constraintStart_toEndOf="@id/maxTxt"/>
+
+    <TextView
+        android:id="@+id/minTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/minTemperature"
+        app:layout_constraintTop_toBottomOf="@+id/maxTxt"
+        app:layout_constraintStart_toStartOf="@+id/timeStampTxt"
+        app:layout_constraintEnd_toEndOf="@+id/timeStampTxt"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        app:layout_constraintStart_toEndOf="@+id/minTxt"
+        app:layout_constraintBottom_toBottomOf="@+id/minTxt"
+        app:layout_constraintTop_toTopOf="@+id/minTxt"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
+        android:id="@+id/goBackBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/backHome"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/minTxt"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
