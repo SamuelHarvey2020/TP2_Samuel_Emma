@@ -9,6 +9,7 @@ import androidx.test.platform.app.InstrumentationRegistry;
 
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.w32.tp2_samuel_emma.data.SensorDataStats;
 import com.w32.tp2_samuel_emma.database.MyDatabaseFactory;
 import com.w32.tp2_samuel_emma.repository.SensorDataRepository;
 
