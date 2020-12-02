@@ -3,6 +3,7 @@ package com.w32.tp2_samuel_emma.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +16,9 @@ import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 import com.w32.tp2_samuel_emma.R;
 import com.w32.tp2_samuel_emma.controller.ModelControllerTemperature;
+import com.w32.tp2_samuel_emma.data.SensorDataStats;
+import com.w32.tp2_samuel_emma.database.MyDatabaseFactory;
+import com.w32.tp2_samuel_emma.repository.SensorDataRepository;
 import com.w32.tp2_samuel_emma.sensor.SensorData;
 import com.w32.tp2_samuel_emma.sensor.SensorValue;
 
@@ -22,14 +26,21 @@ public class TemperatureActivity extends AppCompatActivity {
     SensorData values;
     GraphView graph;
     ModelControllerTemperature controller;
+    //Interface
     ImageButton upMaxBtn;
     ImageButton downMaxBtn;
     ImageButton upMinBtn;
     ImageButton downMinBtn;
     private TextView maxTxt;
     private TextView minTxt;
+    //Graphique
     private LineGraphSeries<DataPoint> maxSeries;
     private LineGraphSeries<DataPoint> minSeries;
+    //Database
+    private MyDatabaseFactory databaseFactory;
+    private SensorDataRepository repoSensorData;
+    private SQLiteDatabase database;
+    private SensorDataStats sensorDataStats;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +48,16 @@ public class TemperatureActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE); //Cache le titre de l'application
         getSupportActionBar().hide(); //cache l'espace du titre
         setContentView(R.layout.activity_temperature);
+
+        //===========CONNEXION A LA BD POUR L'INTERFACE=========
+
+        databaseFactory = new MyDatabaseFactory(this);
+        database = databaseFactory.getWritableDatabase();
+        sensorDataStats = new SensorDataStats();
+
+        //Obtention d'un repository pour l'accès aux données
+        repoSensorData = new SensorDataRepository(database);
+        //=======================================================
 
         maxTxt = findViewById(R.id.maxTempNb);
         minTxt = findViewById(R.id.minTempNb);
@@ -158,5 +179,31 @@ public class TemperatureActivity extends AppCompatActivity {
         outState.putParcelable("SI_PARCEL_SENSOR", this.values);
         outState.putDouble("MAX_TEMP", controller.getHighLimit());
         outState.putDouble("MIN_TEMP", controller.getLowLimit());
+    }
+
+    private void addNewSensorDataStat(){
+        /*public void onSaveCours(View view)
+        {
+            if(isOnEdit){
+                editNewCours();
+            }
+            else{
+                if (chkTechnique.isChecked()){
+                    isTechniqueChecked = 1;
+                }
+                editCours.setCode(txtCode.getText().toString());
+                editCours.setNom(txtNom.getText().toString());
+                editCours.setProf(txtProf.getText().toString());
+                editCours.setSession(comboSession.getSelectedItem().toString());
+                editCours.setTechnique(isTechniqueChecked);
+
+                repoCours.insert(editCours);
+            }
+
+            onBackPressed();
+        }*/
+        sensorDataStats.setSensorID("TEMPERATURE");
+        
+
     }
 }
