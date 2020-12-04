@@ -37,7 +37,7 @@
         android:onClick="onStartTemperature"
         android:text="@string/start_temperature"
         app:layout_constraintBottom_toBottomOf="@id/button_Humid"
-        app:layout_constraintEnd_toStartOf="button_stats"
+        app:layout_constraintEnd_toStartOf="@+id/button_stats"
         app:layout_constraintStart_toEndOf="@id/button_Humid"
         app:layout_constraintTop_toTopOf="@id/button_Humid"/>
 

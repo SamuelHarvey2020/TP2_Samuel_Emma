@@ -15,5 +15,9 @@
     <color name="STbackground">#F4EFCE</color>
     <color name="STblue">#335c67</color>
     <color name="STyellow">#E6BE81</color>
-    <color name="colorDarkGrey">#BBBBBB</color>
+
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="colorDarkGrey">#D3D3D3</color>
 </resources>
