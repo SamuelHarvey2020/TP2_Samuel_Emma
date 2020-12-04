@@ -34,15 +34,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //===========CONNEXION A LA BD POUR L'INTERFACE=========
-
-        databaseFactory = new MyDatabaseFactory(this);
-        database = databaseFactory.getWritableDatabase();
-
-        //Obtention d'un repository pour l'accès aux données
-        repoSensorData = new SensorDataRepository(database);
-        //=======================================================
-
         tvMessages = findViewById(R.id.tv_messagesText);
         if (savedInstanceState != null) {
             sensor = savedInstanceState.getParcelable("SI_PARCEL_SENSOR");
