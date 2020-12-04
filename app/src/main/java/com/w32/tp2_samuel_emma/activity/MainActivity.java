@@ -25,9 +25,6 @@ public class MainActivity extends AppCompatActivity {
     private SensorData sensor;
     private TextView tvMessages;
     //Database
-    private MyDatabaseFactory databaseFactory;
-    private SensorDataRepository repoSensorData;
-    private SQLiteDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

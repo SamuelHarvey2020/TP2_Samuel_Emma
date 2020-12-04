@@ -9,7 +9,7 @@
     <string name="success">Data was saved successfully!</string>
     <string name="error">Data was not loaded correctly</string>
     <string name="data_read">values have been saved.</string>
-    <string name="btn_goBack">Go back</string>
+    <string name="btn_goBack">Save and go back</string>
 
     <!-- Activité température-->
     <string name="maxTemperature">High limit</string>
