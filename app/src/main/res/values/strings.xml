@@ -37,5 +37,6 @@
     <string name="temparatureBtn">Temperature</string>
     <string name="timeStamp">Current date:</string>
     <string name="backHome">Back to main menu</string>
+    <string name="startStats">Start stats</string>
 
 </resources>

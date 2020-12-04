@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.w32.tp2_samuel_emma.R;
 
-public class SensorStats extends AppCompatActivity {
+public class SensorStatsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

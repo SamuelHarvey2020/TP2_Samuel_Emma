@@ -20,8 +20,8 @@
     <!-- Bouton humidité -->
     <Button
         android:id="@+id/button_Humid"
-        android:layout_width="150dp"
-        android:layout_height="55dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:onClick="onStartHumidity"
         android:text="@string/start_humidity"
         app:layout_constraintBottom_toTopOf="@id/tv_Message"
@@ -32,14 +32,25 @@
     <!-- Bouton température -->
     <Button
         android:id="@+id/button_Temp"
-        android:layout_width="150dp"
-        android:layout_height="55dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:onClick="onStartTemperature"
         android:text="@string/start_temperature"
         app:layout_constraintBottom_toBottomOf="@id/button_Humid"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="button_stats"
         app:layout_constraintStart_toEndOf="@id/button_Humid"
         app:layout_constraintTop_toTopOf="@id/button_Humid"/>
+
+    <Button
+        android:id="@+id/button_stats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onStartStats"
+        android:text="@string/startStats"
+        app:layout_constraintBottom_toBottomOf="@id/button_Temp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/button_Temp"
+        app:layout_constraintTop_toTopOf="@id/button_Temp"/>
 
     <TextView
         android:id="@+id/tv_Message"

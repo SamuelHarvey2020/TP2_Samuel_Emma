@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.SensorStats"></activity>
+        <activity android:name=".activity.SensorStatsActivity"></activity>
         <activity android:name=".activity.TemperatureActivity" />
         <activity android:name=".activity.HumidityActivity" />
         <activity android:name=".activity.MainActivity">

@@ -151,4 +151,9 @@ public class MainActivity extends AppCompatActivity {
 
         return jsonString;
     }
+
+    public void onStartStats(View view) throws IOException {
+        Intent intent = new Intent(this, SensorStatsActivity.class);
+        startActivity(intent);
+    }
 }

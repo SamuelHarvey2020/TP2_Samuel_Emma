@@ -26,5 +26,6 @@
     <string name="error" translatable="false">Une erreur est survenue pendant le chargement des données.</string>
     <string name="data_read" translatable="false">données ont été enregistrées.</string>
     <string name="btn_goBack">Retour</string>
+    <string name="startStats">Start stats</string>
 
 </resources>
