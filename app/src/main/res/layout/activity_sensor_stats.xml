@@ -35,6 +35,7 @@
             android:id="@+id/humidityBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="onClickHumidity"
             android:textStyle="bold"
             android:text="@string/humidityBtn" />
 
@@ -42,6 +43,7 @@
             android:id="@+id/temperatureBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="onClickTemperature"
             android:textStyle="bold"
             android:text="@string/temparatureBtn" />
     </RadioGroup>
