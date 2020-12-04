@@ -48,7 +48,7 @@ public class SensorDataStatsTable {
             "FROM " +
             "        sensorDataStats " +
             "WHERE " +
-            "        sensorDataStats.id = ?";
+            "        sensorDataStats.sensorID = ?";
 
 
     public static final String SELECT_LAST_OF_SQL = "" +

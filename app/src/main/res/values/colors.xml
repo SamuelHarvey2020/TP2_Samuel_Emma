@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
-    <color name="colorDarkGrey">#D3D3D3</color>
-
     <!-- Activité temperature-->
     <color name="background">#f4f1de</color>
     <color name="buttons">#e07a5f</color>
@@ -15,4 +10,9 @@
     <color name="titleH">#1b667e</color>
     <color name="sapphire">#0F52BA</color>
     <color name="text">#3d405b</color>
+
+    <!-- Activité sensor stats-->
+    <color name="STbackground">#F4EFCE</color>
+    <color name="STblue">#335c67</color>
+    <color name="STyellow">#E6BE81</color>
 </resources>

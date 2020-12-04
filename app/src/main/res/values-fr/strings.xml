@@ -20,5 +20,11 @@
     <string name="temparatureBtn">Température</string>
     <string name="timeStamp">Date:</string>
     <string name="backHome">Retour au menu principal</string>
+    <string name="dataActivityBtn">Sauvegarde et retour</string>
+    <string name="no_info_txt" translatable="false">Aucune information enregistrée</string>
+    <string name="success" translatable="false">Données enregistrées avec succès!</string>
+    <string name="error" translatable="false">Une erreur est survenue pendant le chargement des données.</string>
+    <string name="data_read" translatable="false">données ont été enregistrées.</string>
+    <string name="btn_goBack">Retour</string>
 
 </resources>

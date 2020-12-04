@@ -3,8 +3,13 @@ package com.w32.tp2_samuel_emma.repository;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.w32.tp2_samuel_emma.data.SensorDataStats;
 import com.w32.tp2_samuel_emma.database.SensorDataStatsTable;
+import com.w32.tp2_samuel_emma.sensor.SensorID;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SensorDataRepository implements Repository<SensorDataStats> {
 
@@ -20,7 +25,7 @@ public class SensorDataRepository implements Repository<SensorDataStats> {
         try{
             database.execSQL(SensorDataStatsTable.INSERT_SQL, new String[]
                     {
-                            sensorDataStats.getSensorID(),
+                            String.valueOf(sensorDataStats.getSensorID()),
                             String.valueOf(sensorDataStats.getTimeStamp()),
                             String.valueOf(sensorDataStats.getMin()),
                             String.valueOf(sensorDataStats.getMax()),
@@ -42,7 +47,7 @@ public class SensorDataRepository implements Repository<SensorDataStats> {
             database.execSQL(SensorDataStatsTable.UPDATE_SQL, new String[]
                     {
                             String.valueOf(sensorDataStats.getId()),
-                            sensorDataStats.getSensorID(),
+                            String.valueOf(sensorDataStats.getSensorID()),
                             String.valueOf(sensorDataStats.getTimeStamp()),
                             String.valueOf(sensorDataStats.getMin()),
                             String.valueOf(sensorDataStats.getMax()),
@@ -77,7 +82,10 @@ public class SensorDataRepository implements Repository<SensorDataStats> {
                 {
                     sensorDataStats = new SensorDataStats();
                     sensorDataStats.setId(cursor.getInt(0));
-                    sensorDataStats.setSensorID(cursor.getString(1));
+                    if(cursor.getString(1) == String.valueOf(SensorID.TEMPERATURE_ID))
+                        sensorDataStats.setSensorID(SensorID.TEMPERATURE_ID);
+                    else
+                        sensorDataStats.setSensorID(SensorID.HUMIDITY_ID);
                     sensorDataStats.setTimeStamp(Long.parseLong(cursor.getString(2)));
                     sensorDataStats.setMin(Double.parseDouble(cursor.getString(3)));
                     sensorDataStats.setMax(Double.parseDouble(cursor.getString(4)));
@@ -119,5 +127,46 @@ public class SensorDataRepository implements Repository<SensorDataStats> {
         }catch(RuntimeException e){
             return false;
         }
+    }
+
+    public List<SensorDataStats> findAll(SensorID id)
+    {
+        List<SensorDataStats> sensorList = new ArrayList<>();
+        Cursor cursor = null;
+
+        try{
+            //on débute une transaction
+            database.beginTransaction();
+            cursor = database.rawQuery(SensorDataStatsTable.SELECT_ONE_OF_SQL, new String[]{String.valueOf(id)});
+
+            while(cursor.moveToNext()){
+                SensorDataStats sensor = new SensorDataStats();
+                sensor.setId(cursor.getInt(0));
+                if(cursor.getString(1) == String.valueOf(SensorID.TEMPERATURE_ID))
+                    sensor.setSensorID(SensorID.TEMPERATURE_ID);
+                else
+                    sensor.setSensorID(SensorID.HUMIDITY_ID);
+                sensor.setTimeStamp(cursor.getLong(2));
+                sensor.setMin(cursor.getDouble(3));
+                sensor.setMax(cursor.getDouble(4));
+
+                sensorList.add(sensor);
+            }
+
+            database.setTransactionSuccessful();
+        }
+        catch(RuntimeException e){
+            return null;
+        }
+
+        finally
+        {
+            if (cursor != null) {
+                cursor.close();
+            }
+            database.endTransaction();
+        }
+
+        return sensorList;
     }
 }

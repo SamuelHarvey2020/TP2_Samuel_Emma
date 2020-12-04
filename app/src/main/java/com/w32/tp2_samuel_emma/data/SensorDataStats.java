@@ -3,20 +3,22 @@ package com.w32.tp2_samuel_emma.data;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.w32.tp2_samuel_emma.sensor.SensorID;
+
 public class SensorDataStats implements Parcelable{
 
     private int id;
-    private String sensorID;
+    private SensorID sensorID;
     private long timeStamp;
     private double min;
     private double max;
 
     public SensorDataStats()
     {
-        this(0, "", 0, 0, 0);
+        this(0, null, 0, 0, 0);
     }
 
-    public SensorDataStats(int id, String sensorID, long timeStamp, double min, double max)
+    public SensorDataStats(int id, SensorID sensorID, long timeStamp, double min, double max)
     {
         this.id = id;
         this.sensorID = sensorID;
@@ -34,11 +36,11 @@ public class SensorDataStats implements Parcelable{
         this.id = id;
     }
 
-    public String getSensorID() {
+    public SensorID getSensorID() {
         return sensorID;
     }
 
-    public void setSensorID(String sensorID) {
+    public void setSensorID(SensorID sensorID) {
         this.sensorID = sensorID;
     }
 
@@ -65,7 +67,13 @@ public class SensorDataStats implements Parcelable{
     public void setMax(double max) {
         this.max = max;
     }
+
     protected SensorDataStats(Parcel in) {
+        this.id = in.readInt();
+        this.sensorID = (SensorID) in.readSerializable();
+        this.timeStamp = in.readLong();
+        this.min = in.readDouble();
+        this.max = in.readDouble();
     }
 
     public static final Creator<SensorDataStats> CREATOR = new Creator<SensorDataStats>() {
@@ -87,6 +95,11 @@ public class SensorDataStats implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(id);
+        parcel.writeSerializable(sensorID);
+        parcel.writeLong(timeStamp);
+        parcel.writeDouble(min);
+        parcel.writeDouble(max);
     }
 
 }

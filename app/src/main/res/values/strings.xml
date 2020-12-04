@@ -5,17 +5,17 @@
     <string name="start_temperature">Start Temperature</string>
     <string name="Messages" translatable="false">Messages</string>
     <string name="messages_textArea">Something Here</string>
-    <string name="no_info_txt" translatable="false">Aucune information enregistrée</string>
-    <string name="success" translatable="false">Données enregistrées avec succès!</string>
-    <string name="error" translatable="false">Une erreur est survenue pendant le chargement des données.</string>
-    <string name="data_read" translatable="false">données ont été enregistrées.</string>
-    <string name="btn_goBack" translatable="false">Go back</string>
+    <string name="no_info_txt">No data found</string>
+    <string name="success">Data was saved successfully!</string>
+    <string name="error">Data was not loaded correctly</string>
+    <string name="data_read">values have been saved.</string>
+    <string name="btn_goBack">Go back</string>
 
     <!-- Activité température-->
     <string name="maxTemperature">High limit</string>
     <string name="minTemperature">Low limit</string>
     <string name="temperatureWelcome">Temperature values</string>
-
+    <string name="dataActivityBtn">Save and return to main menu</string>
 
     <!-- Activité Humidité -->
     <string name="HumidityWelcome">Humidity Values</string>

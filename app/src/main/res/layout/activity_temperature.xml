@@ -176,5 +176,19 @@
         app:layout_constraintTop_toBottomOf="@+id/upMinTemp"
         app:srcCompat="@android:drawable/arrow_down_float" />
 
+    <Button
+        android:id="@+id/sendDataBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/buttons"
+        android:onClick="onSaveData"
+        android:textColor="#FFFF"
+        android:text="@string/dataActivityBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

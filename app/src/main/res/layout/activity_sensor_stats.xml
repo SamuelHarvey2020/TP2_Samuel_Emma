@@ -4,22 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/STbackground"
     tools:context=".activity.SensorStats">
 
     <TextView
         android:id="@+id/sensorTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/STblue"
+        android:textStyle="bold"
+        android:textSize="40dp"
         android:text="@string/statsTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/radioGroup"/>
+        app:layout_constraintBottom_toTopOf="@+id/radioGroup"
+        />
 
     <RadioGroup
         android:id="@+id/radioGroup"
-        android:layout_width="wrap_content"
+        android:layout_width="256dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/rounded_square"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sensorTitle"
@@ -29,12 +35,14 @@
             android:id="@+id/humidityBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             android:text="@string/humidityBtn" />
 
         <RadioButton
             android:id="@+id/temperatureBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             android:text="@string/temparatureBtn" />
     </RadioGroup>
 
@@ -42,6 +50,9 @@
         android:id="@+id/timeStampTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:textColor="@color/STblue"
+        android:textStyle="bold"
         android:text="@string/timeStamp"
         app:layout_constraintBottom_toTopOf="@+id/maxTxt"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,6 +63,7 @@
         android:id="@+id/timeStampSpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/STyellow"
         app:layout_constraintStart_toEndOf="@+id/timeStampTxt"
         app:layout_constraintTop_toTopOf="@+id/timeStampTxt"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -60,6 +72,9 @@
         android:id="@+id/maxTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:textColor="@color/STblue"
+        android:textStyle="bold"
         android:text="@string/maxTemperature"
         app:layout_constraintTop_toBottomOf="@+id/timeStampTxt"
         app:layout_constraintStart_toStartOf="@+id/timeStampTxt"
@@ -70,6 +85,9 @@
         android:id="@+id/maxValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:textColor="@color/STblue"
+        android:textStyle="bold"
         android:text="0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/maxTxt"
@@ -80,16 +98,23 @@
         android:id="@+id/minTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:textColor="@color/STblue"
+        android:layout_marginBottom="40dp"
+        android:textStyle="bold"
         android:text="@string/minTemperature"
         app:layout_constraintTop_toBottomOf="@+id/maxTxt"
         app:layout_constraintStart_toStartOf="@+id/timeStampTxt"
         app:layout_constraintEnd_toEndOf="@+id/timeStampTxt"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toTopOf="@id/goBackBtn"/>
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:textColor="@color/STblue"
+        android:textStyle="bold"
         android:text="0"
         app:layout_constraintStart_toEndOf="@+id/minTxt"
         app:layout_constraintBottom_toBottomOf="@+id/minTxt"
@@ -98,8 +123,10 @@
 
     <Button
         android:id="@+id/goBackBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
+        android:background="@color/STblue"
+        android:textColor="#FFFF"
         android:text="@string/backHome"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

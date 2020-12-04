@@ -20,7 +20,10 @@ import com.w32.tp2_samuel_emma.data.SensorDataStats;
 import com.w32.tp2_samuel_emma.database.MyDatabaseFactory;
 import com.w32.tp2_samuel_emma.repository.SensorDataRepository;
 import com.w32.tp2_samuel_emma.sensor.SensorData;
+import com.w32.tp2_samuel_emma.sensor.SensorID;
 import com.w32.tp2_samuel_emma.sensor.SensorValue;
+
+import java.util.Calendar;
 
 public class TemperatureActivity extends AppCompatActivity {
     SensorData values;
@@ -182,28 +185,19 @@ public class TemperatureActivity extends AppCompatActivity {
     }
 
     private void addNewSensorDataStat(){
-        /*public void onSaveCours(View view)
-        {
-            if(isOnEdit){
-                editNewCours();
-            }
-            else{
-                if (chkTechnique.isChecked()){
-                    isTechniqueChecked = 1;
-                }
-                editCours.setCode(txtCode.getText().toString());
-                editCours.setNom(txtNom.getText().toString());
-                editCours.setProf(txtProf.getText().toString());
-                editCours.setSession(comboSession.getSelectedItem().toString());
-                editCours.setTechnique(isTechniqueChecked);
+        long elapsedTime = Calendar.getInstance().getTime().toInstant().toEpochMilli();
 
-                repoCours.insert(editCours);
-            }
+        sensorDataStats.setSensorID(SensorID.TEMPERATURE_ID);
+        sensorDataStats.setTimeStamp(elapsedTime);
+        sensorDataStats.setMax(controller.getHighLimit());
+        sensorDataStats.setMin(controller.getLowLimit());
 
-            onBackPressed();
-        }*/
-        sensorDataStats.setSensorID("TEMPERATURE");
-        
-
+        repoSensorData.insert(sensorDataStats);
     }
+
+    public void onSaveData(View view) {
+        addNewSensorDataStat();
+        onBackPressed();
+    }
+
 }
