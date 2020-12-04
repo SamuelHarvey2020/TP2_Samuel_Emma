@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     private SensorData sensor;
     private TextView tvMessages;
+    //Database
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

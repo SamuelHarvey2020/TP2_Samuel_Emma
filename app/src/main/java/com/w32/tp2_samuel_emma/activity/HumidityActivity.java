@@ -3,6 +3,7 @@ package com.w32.tp2_samuel_emma.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -15,8 +16,14 @@ import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
 import com.w32.tp2_samuel_emma.R;
 import com.w32.tp2_samuel_emma.controller.ModelControllerHumidity;
+import com.w32.tp2_samuel_emma.data.SensorDataStats;
+import com.w32.tp2_samuel_emma.database.MyDatabaseFactory;
+import com.w32.tp2_samuel_emma.repository.SensorDataRepository;
 import com.w32.tp2_samuel_emma.sensor.SensorData;
+import com.w32.tp2_samuel_emma.sensor.SensorID;
 import com.w32.tp2_samuel_emma.sensor.SensorValue;
+
+import java.util.Calendar;
 
 public class HumidityActivity extends AppCompatActivity {
 
@@ -31,6 +38,10 @@ public class HumidityActivity extends AppCompatActivity {
     private GraphView graph;
     private BarGraphSeries<DataPoint> series;
     private double zoneSpan;
+    private MyDatabaseFactory databaseFactory;
+    private SensorDataRepository repoSensorData;
+    private SQLiteDatabase database;
+    private SensorDataStats sensorDataStats;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +53,16 @@ public class HumidityActivity extends AppCompatActivity {
         tvMin = findViewById(R.id.txtMinValue);
         zones = findViewById(R.id.Zones);
         this.graph = (GraphView) findViewById(R.id.graphHumidity);
+
+        //===========CONNEXION A LA BD POUR L'INTERFACE=========
+
+        databaseFactory = new MyDatabaseFactory(this);
+        database = databaseFactory.getWritableDatabase();
+        sensorDataStats = new SensorDataStats();
+
+        //Obtention d'un repository pour l'accès aux données
+        repoSensorData = new SensorDataRepository(database);
+        //=======================================================
 
         if (savedInstanceState != null) {
             values = savedInstanceState.getParcelable("SI_PARCEL_SENSOR");
@@ -155,6 +176,7 @@ public class HumidityActivity extends AppCompatActivity {
     }
 
     public void onGoBack(View view) {
+        addNewSensorDataStat();
         onBackPressed();
     }
 
@@ -188,6 +210,7 @@ public class HumidityActivity extends AppCompatActivity {
         controller.setSelectedZone(zone);
         displayMinAndMaxValues();
     }
+
     /**
      * Retire la série courante et crée un nouveau graphique
      */
@@ -196,4 +219,17 @@ public class HumidityActivity extends AppCompatActivity {
         this.series = null;
         createGraph();
     }
+
+    private void addNewSensorDataStat(){
+        long elapsedTime = Calendar.getInstance().getTime().toInstant().toEpochMilli();
+        int zone = controller.getSelectedZone();
+
+        sensorDataStats.setSensorID(SensorID.HUMIDITY_ID);
+        sensorDataStats.setTimeStamp(elapsedTime);
+        sensorDataStats.setMax(controller.getUpperLimit(zone));
+        sensorDataStats.setMin(controller.getLowerLimit(zone));
+
+        repoSensorData.insert(sensorDataStats);
+    }
+
 }
