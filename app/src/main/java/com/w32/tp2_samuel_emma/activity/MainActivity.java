@@ -1,6 +1,7 @@
 package com.w32.tp2_samuel_emma.activity;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -9,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.w32.tp2_samuel_emma.R;
+import com.w32.tp2_samuel_emma.database.MyDatabaseFactory;
+import com.w32.tp2_samuel_emma.repository.SensorDataRepository;
 import com.w32.tp2_samuel_emma.sensor.SensorData;
 import com.w32.tp2_samuel_emma.sensor.SensorID;
 
@@ -21,13 +24,26 @@ public class MainActivity extends AppCompatActivity {
 
     private SensorData sensor;
     private TextView tvMessages;
+    //Database
+    private MyDatabaseFactory databaseFactory;
+    private SensorDataRepository repoSensorData;
+    private SQLiteDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        tvMessages = findViewById(R.id.tv_messagesText);
 
+        //===========CONNEXION A LA BD POUR L'INTERFACE=========
+
+        databaseFactory = new MyDatabaseFactory(this);
+        database = databaseFactory.getWritableDatabase();
+
+        //Obtention d'un repository pour l'accès aux données
+        repoSensorData = new SensorDataRepository(database);
+        //=======================================================
+
+        tvMessages = findViewById(R.id.tv_messagesText);
         if (savedInstanceState != null) {
             sensor = savedInstanceState.getParcelable("SI_PARCEL_SENSOR");
             tvMessages.setText(savedInstanceState.getString("SI_TEXT"));

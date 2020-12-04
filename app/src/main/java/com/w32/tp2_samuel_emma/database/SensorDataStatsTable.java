@@ -36,8 +36,6 @@ public class SensorDataStatsTable {
             "FROM " +
             "        sensorDataStats ";
 
-
-
     public static final String SELECT_ONE_OF_SQL = "" +
             "SELECT " +
             "        sensorDataStats.id, " +
