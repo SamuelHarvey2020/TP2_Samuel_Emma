@@ -8,6 +8,8 @@ import com.w32.tp2_samuel_emma.sensor.SensorID;
 
 public class MyDatabaseFactory extends SQLiteOpenHelper {
 
+    //S'il faut faire une grosse modif à la BD, changer le nom de la BD
+    //Sinon, la BD ne sera jamais recréée
     private static final String DATABASE_NAME = "TP2bPartie2";
     private static final int DATABASE_VERSION = 1;
 

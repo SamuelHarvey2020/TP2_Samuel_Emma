@@ -36,6 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="onClickHumidity"
+            android:checked="true"
             android:textStyle="bold"
             android:text="@string/humidityBtn" />
 
@@ -129,6 +130,7 @@
         android:layout_height="wrap_content"
         android:background="@color/STblue"
         android:textColor="#FFFF"
+        android:onClick="onBackButtonPress"
         android:text="@string/backHome"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
