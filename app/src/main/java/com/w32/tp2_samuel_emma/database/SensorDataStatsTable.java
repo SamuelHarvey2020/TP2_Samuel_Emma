@@ -7,7 +7,7 @@ public class SensorDataStatsTable {
             "       sensorID               TEXT, " +
             "       timeStamp              LONG, " +
             "       min                    DOUBLE, " +
-            "       max                    DOUBLE, " +
+            "       max                    DOUBLE " +
             ")";
 
     public static final String DROP_TABLE_SQL = "" +
@@ -18,7 +18,7 @@ public class SensorDataStatsTable {
             "        sensorID, " +
             "        timeStamp, " +
             "        min, " +
-            "        max, " +
+            "        max " +
             ") VALUES ( " +
             "        ?, " +
             "        ?, " +
@@ -32,11 +32,9 @@ public class SensorDataStatsTable {
             "        sensorDataStats.sensorID, " +
             "        sensorDataStats.timeStamp, " +
             "        sensorDataStats.min, " +
-            "        sensorDataStats.max, " +
+            "        sensorDataStats.max " +
             "FROM " +
             "        sensorDataStats ";
-
-
 
     public static final String SELECT_ONE_OF_SQL = "" +
             "SELECT " +
@@ -44,7 +42,7 @@ public class SensorDataStatsTable {
             "        sensorDataStats.sensorID, " +
             "        sensorDataStats.timeStamp, " +
             "        sensorDataStats.min, " +
-            "        sensorDataStats.max, " +
+            "        sensorDataStats.max " +
             "FROM " +
             "        sensorDataStats " +
             "WHERE " +
@@ -57,7 +55,7 @@ public class SensorDataStatsTable {
             "        sensorDataStats.sensorID, " +
             "        sensorDataStats.timeStamp, " +
             "        sensorDataStats.min, " +
-            "        sensorDataStats.max, " +
+            "        sensorDataStats.max " +
             "FROM " +
             "sensorDataStats ";
 
@@ -68,7 +66,7 @@ public class SensorDataStatsTable {
             "        sensorID = ?, " +
             "        timeStamp = ?, " +
             "        min = ?, " +
-            "        max = ?, " +
+            "        max = ? " +
             "WHERE " +
             "        id = ?";
 
