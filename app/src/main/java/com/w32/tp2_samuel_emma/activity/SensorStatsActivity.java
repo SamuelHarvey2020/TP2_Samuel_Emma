@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.w32.tp2_samuel_emma.R;
 import com.w32.tp2_samuel_emma.data.SensorDataStats;
@@ -19,6 +21,11 @@ public class SensorStatsActivity extends AppCompatActivity {
     private MyDatabaseFactory databaseFactory;
     private SensorDataRepository repoStat;
     private List<SensorDataStats> dataList;
+    private double maxLimit;
+    private double minLimit;
+    private TextView maxTxt;
+    private TextView minTxt;
+    private Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +34,10 @@ public class SensorStatsActivity extends AppCompatActivity {
 
         databaseFactory = new MyDatabaseFactory(this);
         repoStat = new SensorDataRepository(databaseFactory.getWritableDatabase());
+
+        maxTxt = findViewById(R.id.maxValue);
+        minTxt = findViewById(R.id.minValue);
+        spinner = findViewById(R.id.timeStampSpinner);
 
         //ajout de données dans le spinner
         populateSpinnerWithData(SensorID.HUMIDITY_ID);
