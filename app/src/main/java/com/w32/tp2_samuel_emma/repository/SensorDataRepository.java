@@ -46,7 +46,6 @@ public class SensorDataRepository implements Repository<SensorDataStats> {
 
             database.execSQL(SensorDataStatsTable.UPDATE_SQL, new String[]
                     {
-                            String.valueOf(sensorDataStats.getId()),
                             String.valueOf(sensorDataStats.getSensorID()),
                             String.valueOf(sensorDataStats.getTimeStamp()),
                             String.valueOf(sensorDataStats.getMin()),
@@ -119,10 +118,10 @@ public class SensorDataRepository implements Repository<SensorDataStats> {
     }
 
     @Override
-    public boolean delete(int id) {
+    public boolean delete(long timeStamp) {
         try{
             database.execSQL(SensorDataStatsTable.DELETE_SQL, new String[]
-                    {String.valueOf(id)});
+                    {String.valueOf(timeStamp)});
             return true;
         }catch(RuntimeException e){
             return false;
@@ -141,14 +140,13 @@ public class SensorDataRepository implements Repository<SensorDataStats> {
 
             while(cursor.moveToNext()){
                 SensorDataStats sensor = new SensorDataStats();
-                sensor.setId(cursor.getInt(0));
-                if(cursor.getString(1) == String.valueOf(SensorID.TEMPERATURE_ID))
+                if(cursor.getString(0) == String.valueOf(SensorID.TEMPERATURE_ID))
                     sensor.setSensorID(SensorID.TEMPERATURE_ID);
                 else
                     sensor.setSensorID(SensorID.HUMIDITY_ID);
-                sensor.setTimeStamp(cursor.getLong(2));
-                sensor.setMin(cursor.getDouble(3));
-                sensor.setMax(cursor.getDouble(4));
+                sensor.setTimeStamp(cursor.getLong(1));
+                sensor.setMin(cursor.getDouble(2));
+                sensor.setMax(cursor.getDouble(3));
 
                 sensorList.add(sensor);
             }
@@ -168,5 +166,41 @@ public class SensorDataRepository implements Repository<SensorDataStats> {
         }
 
         return sensorList;
+    }
+
+    public SensorDataStats findWithTimeStamp(long timeStamp){
+        SensorDataStats sensor = new SensorDataStats();
+        Cursor cursor = null;
+
+        try{
+            //on débute une transaction
+            database.beginTransaction();
+            cursor = database.rawQuery(SensorDataStatsTable.SELECT_ONE_WITH_TIMESTAMP_SQL, new String[]{String.valueOf(timeStamp)});
+
+            while(cursor.moveToNext()){
+                if(cursor.getString(0) == String.valueOf(SensorID.TEMPERATURE_ID))
+                    sensor.setSensorID(SensorID.TEMPERATURE_ID);
+                else
+                    sensor.setSensorID(SensorID.HUMIDITY_ID);
+                sensor.setTimeStamp(cursor.getLong(1));
+                sensor.setMin(cursor.getDouble(2));
+                sensor.setMax(cursor.getDouble(3));
+            }
+
+            database.setTransactionSuccessful();
+        }
+        catch(RuntimeException e){
+            return null;
+        }
+
+        finally
+        {
+            if (cursor != null) {
+                cursor.close();
+            }
+            database.endTransaction();
+        }
+
+        return sensor;
     }
 }
