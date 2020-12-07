@@ -38,6 +38,6 @@
     <string name="timeStamp">Current date:</string>
     <string name="backHome">Back to main menu</string>
     <string name="startStats">Start stats</string>
-    <string name="confirmation">Data has been saved !</string>
+    <string name="confirmationH">Sensor stats for Humidity captor saved !</string>
 
 </resources>

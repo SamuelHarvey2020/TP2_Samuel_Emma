@@ -180,7 +180,7 @@ public class HumidityActivity extends AppCompatActivity {
 
     public void onGoBack(View view) {
         addNewSensorDataStat();
-        Snackbar.make(rootView, R.string.confirmation, Snackbar.LENGTH_LONG).show();
+        Snackbar.make(rootView, R.string.confirmationH, Snackbar.LENGTH_LONG).show();
         onBackPressed();
     }
 
