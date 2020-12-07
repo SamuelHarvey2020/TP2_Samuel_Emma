@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -27,7 +28,6 @@ public class SensorStatsActivity extends AppCompatActivity {
     private TextView maxTxt;
     private TextView minTxt;
     private Spinner spinner;
-    ArrayAdapter<String> adapter;
     private long selectedTimeStamp;
 
     @Override
@@ -45,8 +45,22 @@ public class SensorStatsActivity extends AppCompatActivity {
         //ajout de données dans le spinner
         populateSpinnerWithData(SensorID.HUMIDITY_ID);
         //TODO: changer paramètre de DisplayDataInfo à la variable selectedTimeStamp
-        long timeStamp = this.selectedTimeStamp;
-        displayDataInfo(timeStamp);
+        displayDataInfo(selectedTimeStamp);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                int tsPosition = spinner.getSelectedItemPosition();
+                selectedTimeStamp = dataList.get(tsPosition).getTimeStamp();
+                displayDataInfo(selectedTimeStamp);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
     }
 
     public void onBackButtonPress(View view) {
@@ -80,7 +94,7 @@ public class SensorStatsActivity extends AppCompatActivity {
     private void populateSpinner(){
 
         List<String> spinnerArray =  new ArrayList<String>();
-        spinnerArray.clear();
+
         for(int i = 0; i<this.dataList.size();i++){
 
             SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
@@ -89,13 +103,16 @@ public class SensorStatsActivity extends AppCompatActivity {
             spinnerArray.add(formattedDate);
         }
 
-        this.adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner sItems = (Spinner) spinner;
         sItems.setAdapter(adapter);
 
         int tsPosition = sItems.getSelectedItemPosition();
-        this.selectedTimeStamp = this.dataList.get(tsPosition).getTimeStamp();
+        selectedTimeStamp = dataList.get(tsPosition).getTimeStamp();
+
     }
+
+
 }
