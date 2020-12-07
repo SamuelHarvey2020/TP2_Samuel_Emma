@@ -44,9 +44,12 @@ public class SensorStatsActivity extends AppCompatActivity {
 
         //ajout de données dans le spinner
         populateSpinnerWithData(SensorID.HUMIDITY_ID);
-        //TODO: changer paramètre de DisplayDataInfo à la variable selectedTimeStamp
         displayDataInfo(selectedTimeStamp);
 
+        /**
+         * Listener pour le spinner, chaque fois qu'on clique, on change le selectedTimeStamp et on affiche les données reliés a celui çi
+         * Base du listener trouvé ici : https://stackoverflow.com/questions/1337424/android-spinner-get-the-selected-item-change-event
+         */
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -57,7 +60,7 @@ public class SensorStatsActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
+
             }
 
         });
@@ -69,28 +72,37 @@ public class SensorStatsActivity extends AppCompatActivity {
 
     public void onClickHumidity(View view) {
         populateSpinnerWithData(SensorID.HUMIDITY_ID);
-        //TODO: changer paramètre de DisplayDataInfo à la variable selectedTimeStamp
         displayDataInfo(this.selectedTimeStamp);
     }
 
     public void onClickTemperature(View view) {
         populateSpinnerWithData(SensorID.TEMPERATURE_ID);
-        //TODO: changer paramètre de DisplayDataInfo à la variable selectedTimeStamp
         displayDataInfo(this.selectedTimeStamp);
     }
 
+    /**
+     * fais afficher les valeurs maximales et minimales selon l'objet qui possede le timestamp entré en paramètre
+     * @param timeStamp le timestamp sélectionné dans le spinner
+     */
     private void displayDataInfo(long timeStamp){
         SensorDataStats sensor = repoStat.findWithTimeStamp(timeStamp);
         maxTxt.setText(Double.toString(sensor.getMax()));
         minTxt.setText(Double.toString(sensor.getMin()));
     }
 
+    /**
+     * crée la liste des objets de données avec le sensorId entré en paramètre, puis apelle la méthode de population du spinner
+     * @param id le id du sensor choisi avec les boutons radio
+     */
     private void populateSpinnerWithData(SensorID id){
         List<SensorDataStats> list = repoStat.findAll(id);
         this.dataList = list;
         populateSpinner();
     }
 
+    /**
+     * crée dynamiquement une liste de tout les timestamps formattés des objets de la liste de données et popule le spinner avec cette liste.
+     */
     private void populateSpinner(){
 
         List<String> spinnerArray =  new ArrayList<String>();
