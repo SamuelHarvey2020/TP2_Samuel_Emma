@@ -11,6 +11,7 @@ import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
@@ -26,6 +27,8 @@ import com.w32.tp2_samuel_emma.sensor.SensorValue;
 import java.util.Calendar;
 
 public class TemperatureActivity extends AppCompatActivity {
+
+    private View rootView;
     SensorData values;
     GraphView graph;
     ModelControllerTemperature controller;
@@ -62,6 +65,7 @@ public class TemperatureActivity extends AppCompatActivity {
         repoSensorData = new SensorDataRepository(database);
         //=======================================================
 
+        rootView = findViewById(R.id.rootView);
         maxTxt = findViewById(R.id.maxTempNb);
         minTxt = findViewById(R.id.minTempNb);
         graph = (GraphView) findViewById(R.id.graph);
@@ -197,6 +201,7 @@ public class TemperatureActivity extends AppCompatActivity {
 
     public void onSaveData(View view) {
         addNewSensorDataStat();
+        Snackbar.make(rootView, R.string.confirmationT, Snackbar.LENGTH_LONG).show();
         onBackPressed();
     }
 

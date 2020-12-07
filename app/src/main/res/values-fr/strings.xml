@@ -27,6 +27,7 @@
     <string name="data_read" translatable="false">données ont été enregistrées.</string>
     <string name="btn_goBack">Sauvegarde et Retour</string>
     <string name="startStats">Start stats</string>
-    <string name="confirmationH">Sauvegarde des données du capteur Humiditée effectuée !</string>
+    <string name="confirmationH">Sauvegarde des données du capteur Humidité effectuée !</string>
+    <string name="confirmationT">Sauvegarde des données du capteur Température effectuée !</string>
 
 </resources>
