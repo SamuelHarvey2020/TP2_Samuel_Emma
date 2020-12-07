@@ -19,7 +19,11 @@ public class SensorDataRepository implements Repository<SensorDataStats> {
         this.database = database;
     }
 
-    //Implémentation des méthodes de l'interface avec le "T" remplacé par l'objet de données
+    /**
+     * Insertion de données dans la BD
+     * @param sensorDataStats : données à insérer
+     * @return true si l'opération s'est effectuée correctement, false sinon
+     */
     @Override
     public boolean insert(SensorDataStats sensorDataStats) {
         try{
@@ -36,6 +40,11 @@ public class SensorDataRepository implements Repository<SensorDataStats> {
         }
     }
 
+    /**
+     * mise à jour de la BD
+     * @param sensorDataStats : données à modifier
+     * @return true si l'opération s'est effectuée correctement, false sinon
+     */
     @Override
     public boolean update(SensorDataStats sensorDataStats) {
         //Toujours utiliser un try-catch, ce genre de manipulations peut générer des exceptions de toutes sortes
@@ -68,6 +77,10 @@ public class SensorDataRepository implements Repository<SensorDataStats> {
         return null;
     }
 
+    /**
+     * trouve le dernier item de la BD
+     * @return null si la transaction ne s'est pas effectuée correctement, le sensorDataStat trouvé dans la BD sinon
+     */
     public SensorDataStats findLast() {
         SensorDataStats sensorDataStats = null;
         Cursor cursor = null;
@@ -107,6 +120,11 @@ public class SensorDataRepository implements Repository<SensorDataStats> {
         return sensorDataStats;
     }
 
+    /**
+     * supprime un élément de la liste
+     * @param sensorDataStats : élément à supprimer
+     * @return true si l'opération s'est effectuée correctement, false sinon
+     */
     @Override
     public boolean delete(SensorDataStats sensorDataStats) {
         try{
@@ -118,6 +136,11 @@ public class SensorDataRepository implements Repository<SensorDataStats> {
         }
     }
 
+    /**
+     * supprime un élément de la liste
+     * @param id : id de l'élément à supprimer
+     * @return true si l'opération s'est effectuée correctement, false sinon
+     */
     @Override
     public boolean delete(int id) {
         try{
@@ -129,6 +152,11 @@ public class SensorDataRepository implements Repository<SensorDataStats> {
         }
     }
 
+    /**
+     * trouve tous les éléments selon leur SensorID
+     * @param id : TEMPERATURE_ID ou HUMIDITY_ID
+     * @return une liste avec tous les éléments de température ou d'humidité trouvés
+     */
     public List<SensorDataStats> findAll(SensorID id)
     {
         List<SensorDataStats> sensorList = new ArrayList<>();
@@ -171,6 +199,11 @@ public class SensorDataRepository implements Repository<SensorDataStats> {
         return sensorList;
     }
 
+    /**
+     * Trouve un sensorDataStat selon son timeStamp
+     * @param timeStamp : timeStamp permettant d'identifier le bon sensorDataStats
+     * @return le bon SensorDataStats
+     */
     public SensorDataStats findWithTimeStamp(long timeStamp){
         SensorDataStats sensor = new SensorDataStats();
         Cursor cursor = null;
