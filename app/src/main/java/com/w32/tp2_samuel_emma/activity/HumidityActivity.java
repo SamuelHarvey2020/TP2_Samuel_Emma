@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
@@ -27,6 +28,7 @@ import java.util.Calendar;
 
 public class HumidityActivity extends AppCompatActivity {
 
+    private View rootView;
     SensorData values;
     SensorValue[] valuesArray;
     private TextView textView;
@@ -53,6 +55,7 @@ public class HumidityActivity extends AppCompatActivity {
         tvMin = findViewById(R.id.txtMinValue);
         zones = findViewById(R.id.Zones);
         this.graph = (GraphView) findViewById(R.id.graphHumidity);
+        rootView = findViewById(R.id.rootView);
 
         //===========CONNEXION A LA BD POUR L'INTERFACE=========
 
@@ -177,6 +180,7 @@ public class HumidityActivity extends AppCompatActivity {
 
     public void onGoBack(View view) {
         addNewSensorDataStat();
+        Snackbar.make(rootView, R.string.confirmation, Snackbar.LENGTH_LONG).show();
         onBackPressed();
     }
 

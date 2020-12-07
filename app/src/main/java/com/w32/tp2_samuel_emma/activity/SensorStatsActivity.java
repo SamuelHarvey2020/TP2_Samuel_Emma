@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.w32.tp2_samuel_emma.R;
 import com.w32.tp2_samuel_emma.data.SensorDataStats;
 import com.w32.tp2_samuel_emma.database.MyDatabaseFactory;
