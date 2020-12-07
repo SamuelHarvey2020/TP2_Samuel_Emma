@@ -46,6 +46,7 @@ public class SensorDataRepository implements Repository<SensorDataStats> {
 
             database.execSQL(SensorDataStatsTable.UPDATE_SQL, new String[]
                     {
+                            String.valueOf(sensorDataStats.getId()),
                             String.valueOf(sensorDataStats.getSensorID()),
                             String.valueOf(sensorDataStats.getTimeStamp()),
                             String.valueOf(sensorDataStats.getMin()),
@@ -118,10 +119,10 @@ public class SensorDataRepository implements Repository<SensorDataStats> {
     }
 
     @Override
-    public boolean delete(long timeStamp) {
+    public boolean delete(int id) {
         try{
             database.execSQL(SensorDataStatsTable.DELETE_SQL, new String[]
-                    {String.valueOf(timeStamp)});
+                    {String.valueOf(id)});
             return true;
         }catch(RuntimeException e){
             return false;
@@ -140,10 +141,12 @@ public class SensorDataRepository implements Repository<SensorDataStats> {
 
             while(cursor.moveToNext()){
                 SensorDataStats sensor = new SensorDataStats();
-                if(cursor.getString(0) == String.valueOf(SensorID.TEMPERATURE_ID))
+                if(cursor.getString(0) == String.valueOf(SensorID.TEMPERATURE_ID)){
                     sensor.setSensorID(SensorID.TEMPERATURE_ID);
-                else
+                }
+                else{
                     sensor.setSensorID(SensorID.HUMIDITY_ID);
+                }
                 sensor.setTimeStamp(cursor.getLong(1));
                 sensor.setMin(cursor.getDouble(2));
                 sensor.setMax(cursor.getDouble(3));
@@ -178,13 +181,15 @@ public class SensorDataRepository implements Repository<SensorDataStats> {
             cursor = database.rawQuery(SensorDataStatsTable.SELECT_ONE_WITH_TIMESTAMP_SQL, new String[]{String.valueOf(timeStamp)});
 
             while(cursor.moveToNext()){
-                if(cursor.getString(0) == String.valueOf(SensorID.TEMPERATURE_ID))
+                if(cursor.getString(1) == String.valueOf(SensorID.TEMPERATURE_ID)){
                     sensor.setSensorID(SensorID.TEMPERATURE_ID);
-                else
+                }
+                else{
                     sensor.setSensorID(SensorID.HUMIDITY_ID);
-                sensor.setTimeStamp(cursor.getLong(1));
-                sensor.setMin(cursor.getDouble(2));
-                sensor.setMax(cursor.getDouble(3));
+                }
+                sensor.setTimeStamp(cursor.getLong(2));
+                sensor.setMin(cursor.getDouble(3));
+                sensor.setMax(cursor.getDouble(4));
             }
 
             database.setTransactionSuccessful();

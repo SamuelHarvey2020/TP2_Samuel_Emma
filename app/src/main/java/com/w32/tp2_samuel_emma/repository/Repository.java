@@ -9,5 +9,5 @@ public interface Repository<T> {
     T findLast();
     boolean update(T dataObject);
     boolean delete(T dataObject);
-    boolean delete(long id);
+    boolean delete(int id);
 }
